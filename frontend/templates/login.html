@@ -1,0 +1,129 @@
+<!-- templates/login.html -->
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title >LoginPage</title>
+        <!-- CSS only -->
+
+        {% load static %}
+        <link rel="stylesheet" href="{% static "frontend/css/style.css" %}">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    </head>
+    <!-- <style>
+        body{
+            background: url('{% static "project/images/samoyedBG.jpg" %}');
+            display: table-cell;
+            vertical-align: middle;
+            height: 100%;
+        }
+        html{
+            display: table;
+            margin:auto;
+            height: 100%;
+        }
+        button{
+            background-color: #4CAF50;
+        }
+    </style>  -->
+
+    <body>
+        <div class="topnav">
+            <div class="title">
+                <a class="title">CHARLOTTESVILLE LEASING DATABASE</a>
+            </div>
+            <div class="right">
+                <a class="active" href="#Login">Login</a>
+                <a href="#">Database</a>
+                <a href="#">Add Data</a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="column" style="background-color:lightgray;">
+                <div class="centered">
+                    <h2 class="form_title">Log in</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign In</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- <div class="vl"></div> -->
+
+            <div class="column" style="background-color: lightgrey;">
+                <div class="centered">
+                    <h2 class="sign_up">Sign Up</h2>
+                    <form>
+                        <div class="form-group">
+                            <!-- need to add company name and phone number-->
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
+                    <!-- <form>
+                        <div class="form-group">
+                            <label for="exampleFormControlFile1">Example file input</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    </form> -->
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row">
+            <div class="column">
+                <h2 class="form_title">Log in</h2>
+                <form>
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Email address</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                      <label for="exampleInputPassword1">Password</label>
+                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+            </div>
+            <div class="column">
+                <form>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Example file input</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+                </form>
+            </div>
+          </div> -->
+    </body>
+</html>
