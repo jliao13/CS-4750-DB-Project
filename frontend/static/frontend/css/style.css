@@ -2,13 +2,14 @@
 .topnav {
     background-color: lightskyblue;
     overflow: hidden;
+    align-items: center;
   }
   
   /* Style the links inside the navigation bar */
   .topnav a {
     float: left;
     color: black;
-    text-align: center;
+    align-items: center;
     padding: 14px 16px;
     text-decoration: none;
     font-size: 17px;
@@ -26,18 +27,11 @@
     color: white;
   }
 
-  .topnav .title {
-      font-weight: 800;
-  }
-
-  .right {
-    float: right;
-  }
-
  /* Create two equal columns that floats next to each other */
 .column {
    float: left;
-    width: 50%;
+    /* width: 50%; */
+    /* max-width: 50%; */
     padding: 10px;
     height: 100vh; /* Should be removed. Only for demonstration */
     overflow: hidden;
@@ -65,4 +59,8 @@
     height: vw; */
     /* right: 50%;
     overflow: scroll; */
+}
+
+table, th, td {
+  border: 1px solid black;
 }
