@@ -1,0 +1,66 @@
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: lightskyblue;
+    overflow: hidden;
+    align-items: center;
+  }
+  
+  /* Style the links inside the navigation bar */
+  .topnav a {
+    float: left;
+    color: black;
+    align-items: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  /* Change the color of links on hover */
+  .topnav a:hover {
+    background-color: blue;
+    color: white;
+  }
+  
+  /* Add a color to the active/current link */
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+
+ /* Create two equal columns that floats next to each other */
+.column {
+   float: left;
+    /* width: 50%; */
+    /* max-width: 50%; */
+    padding: 10px;
+    height: 100vh; /* Should be removed. Only for demonstration */
+    overflow: hidden;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* .vl {
+    border-left: 6px solid black;
+    top: 10%;
+    height: 600px;
+    color: transparent;
+} */
+
+.centered {
+    position: relative;
+    top: 10%;
+    left: 10%;
+    /* width: vw;
+    height: vw; */
+    /* right: 50%;
+    overflow: scroll; */
+}
+
+table, th, td {
+  border: 1px solid black;
+}
