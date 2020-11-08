@@ -20,3 +20,11 @@ git push
 ```
 
 Make sure to verify that all your commits got pushed with 'git push' at the end. 
+
+## Connect to GCP MySQL db
+Setup to connect mysql gcp to django app: https://medium.com/@tintinve/instructions-to-set-up-django-3-0-4-and-google-cloud-mysql-3-7-instance-on-macos-catalina-10-1-5-d302164ffc3f  
+
+Run on desktop to run sql proxy:
+```
+./cloud_sql_proxy -instances=cs-4750-db-292115:us-east4:cville-leasing-project-db=tcp:3306
+```

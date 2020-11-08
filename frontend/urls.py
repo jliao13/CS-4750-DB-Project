@@ -5,6 +5,8 @@ from django.conf.urls.static import static
 from frontend import views
 
 urlpatterns = [
+    # url(r'^connection/','formView', name = 'loginform'),
+    # url(r'^login/', 'login', name = 'login'),
     url(r'^$', views.LoginView.as_view(), name='login'),
     url(r'^data/$', views.DataView.as_view(), name='data'), # Add this /about/ route
     url(r'^add/$', views.AddView.as_view(), name='add'), # Add this /about/ route
