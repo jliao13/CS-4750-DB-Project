@@ -84,7 +84,7 @@ except ImportError:
     import pymysql
     pymysql.install_as_MySQLdb()
 
-if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+if os.getenv('GAE_APPLICATION', None):
     # Running on production App Engine, so connect to Google Cloud SQL using
     # the unix socket at /cloudsql/<your-cloudsql-connection string>
     DATABASES = {
@@ -106,9 +106,9 @@ else:
    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('NAME'),
-        'USER': config('USERNAME'),
-        'PASSWORD': config('PASSWORD'),
+        'NAME': 'cville_leasing',
+        'USER': 'Veliky Rentals',
+        'PASSWORD': 'veliky123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

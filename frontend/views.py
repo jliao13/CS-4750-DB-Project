@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from .models import company, lease_tenants, manager_phone, manages
-
+from .models import company, lease_tenants, manager_phone, manages, property, manager, amenities, provides, apartment,lease
 # Create your views here.
 class LoginView(TemplateView):
     def get(self, request, **kwargs):
@@ -33,6 +32,22 @@ class LoginView(TemplateView):
 # Add this view
 class DataView(TemplateView):
     template_name = "data.html"
+
+    def get(self, request, **kwargs):
+        comp = company.objects.all()
+        tenants = lease_tenants.objects.all()
+        m_phone = manager_phone.objects.all()
+        properties = property.objects.all()
+        managers = manager.objects.all()
+        manage_props = manages.objects.all()
+        ameneties_list = amenities.objects.all()
+        provides_amenities = provides.objects.all()
+        apartments = apartment.objects.all()
+        leases = lease.objects.all()
+
+        return render(request, 'data.html', {'comp': comp, 'tenants': tenants, 'm_phone': m_phone, 'properties':
+            properties, 'managers': managers, 'manage_props': manage_props, 'amenities': ameneties_list, 'provides':
+            provides_amenities, 'apartments': apartments, 'leases': leases})
 
 class AddView(TemplateView):
     template_name = "add.html"

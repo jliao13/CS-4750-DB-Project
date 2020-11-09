@@ -1,105 +1,110 @@
 <!-- templates/login.html -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title >LoginPage</title>
-        <!-- CSS only -->
+<head>
+    <meta charset="utf-8">
+    <title>LoginPage</title>
+    <!-- CSS only -->
 
-        {% load static %}
-        <link rel="stylesheet" href="{% static "frontend/css/style.css" %}">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
-    </head>
-    <!-- <style>
-        body{
-            background: url('{% static "project/images/samoyedBG.jpg" %}');
-            display: table-cell;
-            vertical-align: middle;
-            height: 100%;
-        }
-        html{
-            display: table;
-            margin:auto;
-            height: 100%;
-        }
-        button{
-            background-color: #4CAF50;
-        }
-    </style>  -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'frontend/css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<!-- <style>
+    body{
+        background: url('{% static "project/images/samoyedBG.jpg" %}');
+        display: table-cell;
+        vertical-align: middle;
+        height: 100%;
+    }
+    html{
+        display: table;
+        margin:auto;
+        height: 100%;
+    }
+    button{
+        background-color: #4CAF50;
+    }
+</style>  -->
 
-    <body>
-        <div class="topnav">
-            <div class="title" style="display: inline; color: black; font-size: 25px; font-weight: bold;">
-                CVILLE LEASING DATABASE
-                <!-- <a class="titletxt">CHARLOTTESVILLE LEASING DATABASE</a> -->
-            </div>
-            <div class="right" style="display: inline; float:right;">
-                <a class="active" href="{% url 'login' %}">Login</a>
-                <a href="{% url 'data' %}">Database</a>
-                <a href="{% url 'add' %}">Add Data</a>
-            </div>
-        </div>
+<body>
+<div class="topnav">
+    <div class="title" style="display: inline; color: black; font-size: 25px; font-weight: bold;">
+        CVILLE LEASING DATABASE
+        <!-- <a class="titletxt">CHARLOTTESVILLE LEASING DATABASE</a> -->
+    </div>
+    <div class="right" style="display: inline; float:right;">
+        <a class="active" href="{% url 'login' %}">Login</a>
+        <a href="{% url 'data' %}">Database</a>
+        <a href="{% url 'add' %}">Add Data</a>
+    </div>
+</div>
 
-        
 
         {% for cmp in comp %}
         {{cmp.user_id}}, {{cmp.user_name}}, {{cmp.password}}<br>
         {% endfor %}<br>
 
-        {% for tnt in tenants %}
-        {{tnt.transaction_id}}, {{tnt.tenant_name}}<br>
-        {% endfor %}
+<!--        {% for tnt in tenants %}-->
+<!--        {{tnt.transaction_id}}, {{tnt.tenant_name}}<br>-->
+<!--        {% endfor %}-->
 
-        {% for phone in m_phone %}
-        {{phone.employee_id}}, {{phone.phone_number}}<br>
-        {% endfor %}
+<!--        {% for phone in m_phone %}-->
+<!--        {{phone.employee_id}}, {{phone.phone_number}}<br>-->
+<!--        {% endfor %}-->
 
-        <div class="row" style="width:121%; height:100vh;">
-            <div class="col-xs-10 col-sm-5" style="border-right: 2px solid black; background-color: rgba(211, 211, 211, 0.2);">
-                <div class="centered">
-                    <h2 class="form_title">Log in</h2>
-                    <form class="formClass">
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign In</button>
-                    </form>
+<div class="row" style="width:121%; height:100vh;">
+    <div class="col-xs-10 col-sm-5" style="border-right: 2px solid black; background-color: rgba(211, 211, 211, 0.2);">
+        <div class="centered">
+            <h2 class="form_title">Log in</h2>
+            <form class="formClass">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" style="max-width: 70%;" class="form-control" id="exampleInputEmail1"
+                           aria-describedby="emailHelp" placeholder="Enter email">
                 </div>
-            </div>
-
-            <div class="col-xs-10 col-sm-5" style="background-color: rgba(211, 211, 211, 0.2);">
-                <div class="centered">
-                    <h2 class="sign_up">Sign Up</h2>
-                    <form class="formClass">
-                        <div class="form-group">
-                            <!-- need to add company name and phone number-->
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign Up</button>
-                    </form>
-                    <!-- <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                    </form> -->
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1"
+                           placeholder="Password">
                 </div>
-            </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
         </div>
-    </body>
+    </div>
+
+    <div class="col-xs-10 col-sm-5" style="background-color: rgba(211, 211, 211, 0.2);">
+        <div class="centered">
+            <h2 class="sign_up">Sign Up</h2>
+            <form class="formClass">
+                <div class="form-group">
+                    <!-- need to add company name and phone number-->
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" style="max-width: 70%;" class="form-control" id="exampleInputEmail1"
+                           aria-describedby="emailHelp" placeholder="Enter email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                        else.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1"
+                           placeholder="Password">
+                </div>
+                <button type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+            <!-- <form>
+                <div class="form-group">
+                    <label for="exampleFormControlFile1">Example file input</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                </div>
+            </form> -->
+        </div>
+    </div>
+</div>
+</body>
 </html>
