@@ -37,13 +37,10 @@
             </div>
             <div class="right" style="display: inline; float:right;">
                 <a class="active" href="{% url 'login' %}">Login</a>
-                <a href="{% url 'data' %}">Database</a>
-                <a href="{% url 'add' %}">Add Data</a>
             </div>
         </div>
 
-        
-<!-- 
+        <!-- 
         {% for cmp in comp %}
         {{cmp.user_id}}, {{cmp.user_name}}, {{cmp.password}}<br>
         {% endfor %}<br>
@@ -60,10 +57,10 @@
             <div class="col-xs-10 col-sm-5" style="border-right: 2px solid black; background-color: rgba(211, 211, 211, 0.2);">
                 <div class="centered">
                     <h2 class="form_title">Log in</h2>
-                    <form class="formClass" method="POST">
+                    <form class="formClass" action="{% url 'login' %}" method="POST"> {% csrf_token %}
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" name="username" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <label for="exampleInputUsername">Username</label>
+                            <input type="text" name="username" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
