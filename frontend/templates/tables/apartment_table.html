@@ -1,0 +1,23 @@
+<table style="width:100%; height:100%;">
+    <tr>
+        <th>Property Id</th>
+        <th>Price</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>User Id</th>
+    </tr>
+    {% for l in leases%}
+    <tr>
+        <td>{{l.transaction_id}}</td>
+        <td>{{l.price}}</td>
+        <td>{{l.start_date}}</td>
+        <td>{{l.end_date}}</td>
+        <td>{{l.user_id}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- property_id = models.IntegerField(primary_key=True, null=False)
+    apartment_number = models.IntegerField(null=False)
+    style = models.CharField(max_length=255, null=False)
+    square_feet = models.IntegerField(null=False)
+    transaction -->
