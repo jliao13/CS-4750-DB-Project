@@ -4,6 +4,7 @@
     <tr>
         <th>Property ID</th>
         <th>Name</th>
+        <th>Street Name</th>
         <th>Street Number</th>
         <th>City</th>
         <th>State</th>
@@ -12,6 +13,7 @@
     {% for p in properties %}
     <tr>
         <td>{{p.property_id}}</td>
+        <td>{{p.street_name}}</td>
         <td>{{p.name}}</td>
         <td>{{p.street_number}}</td>
         <td>{{p.city}}</td>

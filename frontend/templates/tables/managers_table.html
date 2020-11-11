@@ -1,16 +1,21 @@
 <br>
 <h1 class="center">Managers Table</h1>
-<table class="center"  style="width:100%; height:100%;">
+<table class="center" style="width:100%; height:100%;">
     <tr>
         <th>Employee ID</th>
-        <th>Employee ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Email</th>
+        <th>User Id</th>
     </tr>
-    {% for man in manage_props %}
+    {% for man in managers %}
     <tr>
-        <td>{{man.property_id}}</td>
         <td>{{man.employee_id}}</td>
+        <td>{{man.first_name}}</td>
+        <td>{{man.last_name}}</td>
+        <td>{{man.email}}</td>
+        <td>{{man.user_id}}</td>
     </tr>
-
     {% endfor %}
 </table>
 <!--    property_id = models.IntegerField(primary_key=True, null=False)-->

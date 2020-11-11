@@ -24,6 +24,7 @@ class property(models.Model):
     property_id = models.IntegerField(primary_key=True, null=False)
     name = models.CharField(max_length=255, null=False)
     street_number = models.IntegerField(null=False)
+    street_name = models.CharField(max_length=255, null=False)
     city = models.CharField(max_length=255, null=False)
     state = models.CharField(max_length=255, null=False)
     zip_code = models.IntegerField(null=False)    
