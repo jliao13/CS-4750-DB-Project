@@ -1,17 +1,52 @@
-<br>
-<h1 class="center">Lease Tenants Table</h1>
-<table class="center" style="width:100%; height:100%;">
+<!DOCTYPE html>
+<html>
+<table style="width:100%; height:100%;">
     <tr>
         <th>Transaction ID</th>
         <th>Tenant Name</th>
+        <th>Edit?</th>
     </tr>
     {% for ten in tenants %}
     <tr>
         <td>{{ten.transaction_id}}</td>
         <td>{{ten.tenant_name}}</td>
+        <td>
+            <!-- Trigger the modal with a button -->
+            <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#myModal2">
+            Edit
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal2" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Make Change to Property</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="formClass" action="{% url 'data' %}" method="POST">{% csrf_token %}
+                          <div class="form-group">
+                            <label for="transaction-id">Transaction ID:</label>
+                            <input type="number" name="transaction-id" style="max-width: 70%;" id = "transaction-id">
+                          </div>
+                          <div class="form-group">
+                            <label for="tenant-name">Tenant Name:</label>
+                            <input type="text" name="tenant-name" style="max-width: 70%;" id = "tenant-name">
+                          </div>
+                          <button type="submit" class="btn btn-primary">Update</button>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </td>
     </tr>
+
     {% endfor %}
+
 </table>
-<br><br>
+
 <!--transaction_id = models.IntegerField(primary_key=True, null=False)-->
 <!--    tenant_name = models.CharField(max_length=255, null=False)-->
+</html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.db import connection, transaction
 from django.views.generic import TemplateView
 from .models import company, lease_tenants, manager_phone, manages, property, manager, amenities, provides, apartment, \
@@ -53,11 +53,25 @@ class DataView(TemplateView):
             properties, 'managers': managers, 'manage_props': manage_props, 'amenities': ameneties_list, 'provides':
             provides_amenities, 'apartments': apartments, 'leases': leases, 'parking_spots': spots, 'vehicles': vehicles})
 
+    def delete(request, property_id, apartment_number):
+        apartment.objects.filter(property_id=property_id, apartment_number=apartment_number).delete()
+        return redirect("/../data")
+
+    def update(request):
+        if request.method == "POST":
+            transaction_id = request.POST.get("transaction-id")
+            tenants = request.POST.get("tenant-name")
+
+            table1 = lease_tenants(transaction_id=transaction_id, tenant_name=tenants)
+            table1.save()
+        return redirect("/../data")
+
+
 class AddView(TemplateView):
     template_name = "add.html"
 
     def add(request):
-        if(request.method == "POST"):
+        if request.method == "POST":
             cursor = connection.cursor()
             pid = request.POST.get("property-id")
             p_name = request.POST.get("property-name")
