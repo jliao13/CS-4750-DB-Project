@@ -28,6 +28,9 @@
             background-color: #4CAF50;
         }
     </style>  -->
+    {% for cmp in comp %}
+    {{cmp.user_id}}, {{cmp.user_name}}, {{cmp.password}}<br>
+    {% endfor %}
 
     <body>
         <div class="topnav">
@@ -60,13 +63,13 @@
                     <form class="formClass" action="{% url 'login' %}" method="POST"> {% csrf_token %}
                         <div class="form-group">
                             <label for="exampleInputUsername">Username</label>
-                            <input type="text" name="username" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <input type="text" name="username" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Company name">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
                             <input type="password" name="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password">
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign In</button>
+                        <button name="btnform1" type="submit" class="btn btn-primary">Sign In</button>
                     </form>
                 </div>
             </div>
@@ -74,27 +77,20 @@
             <div class="col-xs-10 col-sm-5" style="background-color: rgba(211, 211, 211, 0.2);">
                 <div class="centered">
                     <h2 class="sign_up">Sign Up</h2>
-                    <form class="formClass">
+                    <form class="formClass" action="{% url 'create' %}" method="POST"> {% csrf_token %}
                         <div class="form-group">
-                            <!-- need to add company name and phone number-->
                         </div>
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Email address</label>
-                            <input type="email" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                            <label for="exampleuser1">Company name (username)</label>
+                            <input type="text" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Company name" name="n_username">
                         </div>
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label>
-                            <input type="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                            <input type="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password" name="n_password">
+                            <small id="passwordHelp" class="form-text text-muted">Password must be longer than 7 characters.</small>
                         </div>
-                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                        <button name="btnform2" type="submit" class="btn btn-primary">Sign Up</button>
                     </form>
-                    <!-- <form>
-                        <div class="form-group">
-                            <label for="exampleFormControlFile1">Example file input</label>
-                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                        </div>
-                    </form> -->
                 </div>
             </div>
         </div>

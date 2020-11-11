@@ -7,6 +7,7 @@ from frontend import views
 urlpatterns = [
     url(r'^$', views.LoginView.as_view(), name='loginPage'),
     url(r'^login/$', views.LoginView.login, name='login'),
+    url(r'^create/$', views.LoginView.create, name='create'),
     url(r'^logout/$', views.LoginView.logout, name='logout'),
     url(r'^data/$', views.DataView.as_view(), name='data'), # Add this /about/ route
     url(r'^add/$', views.AddView.as_view(), name='add'), # Add this /about/ route
