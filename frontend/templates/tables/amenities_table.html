@@ -1,0 +1,30 @@
+<br>
+<h1 class="center">Amenities Table</h1>
+<table class="center" style="width:100%; height:100%;">
+    <tr>
+        <th>Amenities ID</th>
+        <th>Pet friendly</th>
+        <th>Dryer/Washer</th>
+        <th>AC</th>
+        <th>Heating</th>
+        <th>Internet</th>
+    </tr>
+    {% for a in amenities %}
+    <tr>
+        <td>{{a.amenities_id}}</td>
+        <td>{{a.pet_friendly}}</td>
+        <td>{{a.dryer_washer}}</td>
+        <td>{{a.ac}}</td>
+        <td>{{a.heating}}</td>
+        <td>{{a.internet}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<br>
+<!-- amenities_id = models.IntegerField(primary_key=True, null=False)
+    pet_friendly = models.BooleanField(null=False)
+    dryer_washer = models.BooleanField(null=False)
+    ac = models.BooleanField(null=False)
+    heating = models.BooleanField(null=False)
+    internet-->

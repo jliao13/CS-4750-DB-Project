@@ -1,10 +1,10 @@
 <!-- templates/login.html -->
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title >LoginPage</title>
-        <!-- CSS only -->
+<head>
+    <meta charset="utf-8">
+    <title>LoginPage</title>
+    <!-- CSS only -->
 
         {% load static %}
         <link rel="stylesheet" href="{% static "frontend/css/style.css" %}">
@@ -12,87 +12,55 @@
         <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
         <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet"/>
     </head>
-    <!-- <style>
-        body{
-            background: url('{% static "project/images/samoyedBG.jpg" %}');
-            display: table-cell;
-            vertical-align: middle;
-            height: 100%;
-        }
-        html{
-            display: table;
-            margin:auto;
-            height: 100%;
-        }
-        button{
-            background-color: #4CAF50;
-        }
-    </style>  -->
-    {% for cmp in comp %}
-    {{cmp.user_id}}, {{cmp.user_name}}, {{cmp.password}}<br>
-    {% endfor %}
 
-    <body>
-        <div class="topnav">
-            <div class="title" style="display: inline; color: black; font-size: 25px; font-weight: bold;">
-                CVILLE LEASING DATABASE
-                <!-- <a class="titletxt">CHARLOTTESVILLE LEASING DATABASE</a> -->
-            </div>
-            <div class="right" style="display: inline; float:right;">
-                <a class="active" href="{% url 'login' %}">Login</a>
-            </div>
-        </div>
+<body>
+<div class="topnav">
+    <div class="title" style="display: inline; color: black; font-size: 25px; font-weight: bold;">
+        CVILLE LEASING DATABASE
+        <!-- <a class="titletxt">CHARLOTTESVILLE LEASING DATABASE</a> -->
+    </div>
+    <div class="right" style="display: inline; float:right;">
+        <a class="active" href="{% url 'login' %}">Login</a>
+    </div>
+</div>
 
-        <!-- 
-        {% for cmp in comp %}
-        {{cmp.user_id}}, {{cmp.user_name}}, {{cmp.password}}<br>
-        {% endfor %}<br>
-
-        {% for tnt in tenants %}
-        {{tnt.transaction_id}}, {{tnt.tenant_name}}<br>
-        {% endfor %}
-
-        {% for phone in m_phone %}
-        {{phone.employee_id}}, {{phone.phone_number}}<br>
-        {% endfor %} -->
-
-        <div class="row" style="width:121%; height:100vh;">
-            <div class="col-xs-10 col-sm-5" style="border-right: 2px solid black; background-color: rgba(211, 211, 211, 0.2);">
-                <div class="centered">
-                    <h2 class="form_title">Log in</h2>
-                    <form class="formClass" action="{% url 'login' %}" method="POST"> {% csrf_token %}
-                        <div class="form-group">
-                            <label for="exampleInputUsername">Username</label>
-                            <input type="text" name="username" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Company name">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" name="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                        </div>
-                        <button name="btnform1" type="submit" class="btn btn-primary">Sign In</button>
-                    </form>
+<div class="row" style="width:121%; height:100vh;">
+    <div class="col-xs-10 col-sm-5" style="border-right: 2px solid black; background-color: rgba(211, 211, 211, 0.2);">
+        <div class="centered">
+            <h2 class="form_title">Log in</h2>
+            <form class="formClass" action="{% url 'login' %}" method="POST"> {% csrf_token %}
+                <div class="form-group">
+                    <label for="exampleInputUsername">Username</label>
+                    <input type="text" name="username" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Company name">
                 </div>
-            </div>
-
-            <div class="col-xs-10 col-sm-5" style="background-color: rgba(211, 211, 211, 0.2);">
-                <div class="centered">
-                    <h2 class="sign_up">Sign Up</h2>
-                    <form class="formClass" action="{% url 'create' %}" method="POST"> {% csrf_token %}
-                        <div class="form-group">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleuser1">Company name (username)</label>
-                            <input type="text" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Company name" name="n_username">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Password</label>
-                            <input type="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password" name="n_password">
-                            <small id="passwordHelp" class="form-text text-muted">Password must be longer than 7 characters.</small>
-                        </div>
-                        <button name="btnform2" type="submit" class="btn btn-primary">Sign Up</button>
-                    </form>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" name="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password">
                 </div>
-            </div>
+                <button name="btnform1" type="submit" class="btn btn-primary">Sign In</button>
+            </form>
         </div>
-    </body>
+    </div>
+
+    <div class="col-xs-10 col-sm-5" style="background-color: rgba(211, 211, 211, 0.2);">
+        <div class="centered">
+            <h2 class="sign_up">Sign Up</h2>
+            <form class="formClass" action="{% url 'create' %}" method="POST"> {% csrf_token %}
+                <div class="form-group">
+                </div>
+                <div class="form-group">
+                    <label for="exampleuser1">Company name (username)</label>
+                    <input type="text" style="max-width: 70%;" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Company name" name="n_username">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" style="max-width: 70%;" class="form-control" id="exampleInputPassword1" placeholder="Password" name="n_password">
+                    <small id="passwordHelp" class="form-text text-muted">Password must be longer than 7 characters.</small>
+                </div>
+                <button name="btnform2" type="submit" class="btn btn-primary">Sign Up</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
 </html>

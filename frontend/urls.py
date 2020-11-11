@@ -10,7 +10,8 @@ urlpatterns = [
     url(r'^create/$', views.LoginView.create, name='create'),
     url(r'^logout/$', views.LoginView.logout, name='logout'),
     url(r'^data/$', views.DataView.as_view(), name='data'), # Add this /about/ route
-    url(r'^add/$', views.AddView.as_view(), name='add'), # Add this /about/ route
+    url(r'^add/$', views.AddView.add, name='add'), # Add this /about/ route
     # url(r'^finishreal/$', views.FinishRealPageView.as_view()), # Add this /about/ route
     # url(r'^index_copy/$', views.IndexCopyPageView.as_view()), # Add this /about/ route
+    path('delete/<int:property_id>&<int:apartment_number>', views.DataView.delete),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

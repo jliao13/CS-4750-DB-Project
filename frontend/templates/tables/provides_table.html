@@ -1,0 +1,15 @@
+<br>
+<h1 class="center">Provides Table</h1>
+<table class="center"  style="width:100%; height:100%;">
+    <tr>
+        <th>Property ID</th>
+        <th>Amenities ID</th>
+    </tr>
+    {% for p in provides %}
+    <tr>
+        <td>{{p.property_id}}</td>
+        <td>{{p.amenities_id}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br><br>
