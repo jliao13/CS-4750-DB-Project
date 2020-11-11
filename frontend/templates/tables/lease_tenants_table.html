@@ -1,4 +1,6 @@
-<table style="width:100%; height:100%;">
+<br>
+<h1 class="center">Lease Tenants Table</h1>
+<table class="center" style="width:100%; height:100%;">
     <tr>
         <th>Transaction ID</th>
         <th>Tenant Name</th>
@@ -8,8 +10,8 @@
         <td>{{ten.transaction_id}}</td>
         <td>{{ten.tenant_name}}</td>
     </tr>
-
     {% endfor %}
 </table>
+<br>
 <!--transaction_id = models.IntegerField(primary_key=True, null=False)-->
 <!--    tenant_name = models.CharField(max_length=255, null=False)-->

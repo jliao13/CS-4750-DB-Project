@@ -2,22 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="aac1339c-b23a-4478-8f21-f5d47649348e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/amenities_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/apartment_parking_spots_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/apartment_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/lease_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/lease_tenants_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/manager_phone_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/managers_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/manages_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/property_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/provides_table.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/templates/tables/vehicle_table.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/templates/data.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/data.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/general_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/general_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/managers_table.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/amenities_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/amenities_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/apartment_parking_spots_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/apartment_parking_spots_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/apartment_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/apartment_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/general_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/general_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/lease_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/lease_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/lease_tenants_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/lease_tenants_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/manager_phone_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/manager_phone_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/managers_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/managers_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/manages_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/manages_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/property_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/property_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/provides_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/provides_table.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/vehicle_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/vehicle_table.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +45,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../project-1-08" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -69,6 +68,10 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="421" y="95" key="FileChooserDialogImpl" timestamp="1605049518437">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state x="421" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1605049518437" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1604857959359">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
