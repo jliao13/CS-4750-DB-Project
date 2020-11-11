@@ -14,8 +14,12 @@ class LoginView(TemplateView):
             password=request.POST['password']
 
             try:
-                cmp = company.objects.get(user_name=username, password=password)
+                #check username and password and get user_id
+                cursor = connection.cursor()
+                cursor.execute("SELECT user_id FROM company WHERE user_name=%s AND password=%s", [username, password])
+                myresults = cursor.fetchall()
                 request.session['username'] = username
+                request.session['user_id'] = myresults[0][0]
                 return redirect('data')
             except:
                 return render(request, 'login.html', context=None)
@@ -38,8 +42,13 @@ class LoginView(TemplateView):
             cursor.execute("INSERT INTO company(user_id,user_name,password) VALUES( %s , %s, %s)", [user_id, user_name, password])
 
             try:
-                cmp = company.objects.get(user_name=user_name, password=password)
+                cursor = connection.cursor()
+                cursor.execute("SELECT user_id FROM company WHERE user_name=%s AND password=%s", [user_name, password])
+                myresults = cursor.fetchall()
                 request.session['username'] = user_name
+                request.session['user_id'] = myresults[0][0]
+                request.session['username'] = user_name
+                print(request.session['user_id'], flush=True)
                 return redirect('add')
             except:
                 return render(request, 'login.html', context=None)
@@ -49,6 +58,7 @@ class LoginView(TemplateView):
     def logout(request):
         try:
             del request.session['username']
+            del request.session['user_id']
         except:
             pass
         return redirect('login')
