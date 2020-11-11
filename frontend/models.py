@@ -68,7 +68,7 @@ class vehicle(models.Model):
     license_plate = models.CharField(max_length=255, primary_key=True, null=False)
     model = models.CharField(max_length=255, null=True)
     brand = models.CharField(max_length=255, null=True)
-    transaction = models.ForeignKey(lease_tenants, on_delete=models.CASCADE)
+    transaction_id = models.IntegerField(null=False)
     class Meta:
         db_table = 'vehicle'
 
@@ -77,7 +77,7 @@ class lease(models.Model):
     price = models.FloatField(null=False)
     start_date = models.CharField(max_length=255, null=True)
     end_date = models.CharField(max_length=255, null=True)
-    user = models.ForeignKey(company, on_delete=models.CASCADE)
+    user_id = models.IntegerField(null=False)
     class Meta:
         db_table = 'lease'
 
@@ -86,7 +86,7 @@ class manager(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255, null=True)
-    user = models.ForeignKey(company, on_delete=models.CASCADE)
+    user_id = models.IntegerField(null=False)
     class Meta:
         db_table = 'manager'
 
@@ -100,7 +100,7 @@ class apartment(models.Model):
     apartment_number = models.IntegerField(null=False)
     style = models.CharField(max_length=255, null=False)
     square_feet = models.IntegerField(null=False)
-    transaction = models.ForeignKey(lease_tenants, on_delete=models.CASCADE)
+    transaction_id = models.IntegerField(null=False)
     class Meta:
         db_table = 'apartment'
         unique_together = (('property_id','apartment_number'),)
