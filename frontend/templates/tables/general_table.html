@@ -1,0 +1,72 @@
+<!--General table-->
+<table style="width:100%; height:100%;">
+        <tr>
+            <th>Property ID</th>
+            <th>Property Name</th>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Amenities</th>
+            <th>Apartment Number</th>
+            <th>Style</th>
+            <th>Square Feet</th>
+            <th>Transaction ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Edit?</th>
+            <th>Delete?</th>
+        </tr>
+        {% for prop in properties %}
+        {% for apartment in apartments %}
+        {% if prop.property_id == apartment.property_id %}
+        <tr>
+            <td>{{prop.property_id}}</td>
+            <td>{{prop.name}}</td>
+            {% for man_prop in manage_props %}
+            {% if man_prop.property_id == prop.property_id %}
+            <td>{{man_prop.employee_id}}</td>
+                {% for man in managers %}
+                {% if man.employee_id|add:"0" == man_prop.employee_id|add:"0" %}
+            <td>{{man.first_name}}</td>
+            <td>{{man.last_name}}</td>
+            <td>{{man.email}}</td>
+                {% endif %}
+                {% endfor %} <!--mangers-->
+            {% endif %}
+            {% endfor %}<!--manage_props-->
+            {% for prov in provides %}
+                {% if prov.property_id|add:"0" == prop.property_id|add:"0" %}
+                {% for amenity in amenities %}
+                {% if amenity.amenities_id|add:"0" == prov.amenities_id|add:"0" %}
+                <td>{{amenity.amenities_id}}</td>
+                {% endif %}
+                {% endfor %} <!--amenities-->
+                {% endif %}
+            {% endfor %} <!--provides-->
+            <td>{{apartment.apartment_number}}</td>
+            <td>{{apartment.style}}</td>
+            <td>{{apartment.square_feet}}</td>
+            <td>{{apartment.transaction_id}}</td>
+            {% for lease in leases %}
+            {% if lease.transaction_id|add:"0" == apartment.transaction_id|add:"0" %}
+            <td>{{lease.start_date}}</td>
+            <td>{{lease.end_date}}</td>
+            <td>
+            <button type='button' onclick='productEdit(this);' class='btn btn-default'>
+            <a>Edit</a>
+            </button>
+            </td>
+            <td>
+            <button type='button' onclick='productDelete(this);' class='btn btn-default'>
+            <a>X</a>
+            </button>
+            </td>
+            {% endif %}
+            {% endfor %}<!--lease-->
+
+        </tr>
+        {% endif %}
+        {% endfor %}<!--apartments-->
+        {% endfor %}<!--properties-->
+</table>

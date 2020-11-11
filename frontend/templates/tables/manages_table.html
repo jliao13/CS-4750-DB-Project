@@ -1,0 +1,14 @@
+<table style="width:100%; height:100%;">
+    <tr>
+        <th>Property Id</th>
+        <th>Employee Id</th>
+    </tr>
+    {% for m in manage_props%}
+    <tr>
+        <td>{{m.property_id}}</td>
+        <td>{{m.employee_id}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- property_id = models.IntegerField(primary_key=True, null=False)
+    employee_id  -->

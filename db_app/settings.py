@@ -34,12 +34,14 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 INSTALLED_APPS = [
     'django.contrib.admin',
+    # 'company.apps.CompanyConfig'
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frontend',
+    # 'django.contrib.sessions',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.contrib.sessions.middleware.SessionMiddleware',
 ]
 
 ROOT_URLCONF = 'db_app.urls'
@@ -81,7 +84,7 @@ except ImportError:
     import pymysql
     pymysql.install_as_MySQLdb()
 
-if os.getenv('SERVER_SOFTWARE', '').startswith('Google App Engine'):
+if os.getenv('GAE_APPLICATION', None):
     # Running on production App Engine, so connect to Google Cloud SQL using
     # the unix socket at /cloudsql/<your-cloudsql-connection string>
     DATABASES = {
@@ -103,9 +106,9 @@ else:
    DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('NAME'),
-        'USER': config('USERNAME'),
-        'PASSWORD': config('PASSWORD'),
+        'NAME': 'cville_leasing',
+        'USER': 'Veliky Rentals',
+        'PASSWORD': 'veliky123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

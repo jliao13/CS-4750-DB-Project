@@ -1,0 +1,17 @@
+<table style="width:100%; height:100%;">
+    <tr>
+        <th>Property ID</th>
+        <th>Parking Spot</th>
+        <th>Apartment Number</th>
+    </tr>
+    {% for spot in parking_spots %}
+    <tr>
+        <td>{{spot.property_id}}</td>
+        <td>{{spot.parking_spot}}</td>
+        <td>{{spot.apartment_number}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<!-- property_id = models.IntegerField(primary_key=True, null=False)
+    parking_spot = models.IntegerField(null=False)
+    apartment_number-->
