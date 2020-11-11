@@ -12,6 +12,8 @@
     </head>
 
     <body>
+
+
         <div class="topnav">
             <div class="title" style="display: inline; color: black; font-size: 25px; font-weight: bold;">
                 CVILLE LEASING DATABASE
@@ -28,7 +30,7 @@
             <div class="col-xs-10 col-sm-5" style="border-right: 2px solid black; background-color: rgba(211, 211, 211, 0.2);">
                 <div class="centered">
                     <h2 class="form_title">Add Property (Manual)</h2>
-                    <form class="formClass">
+                    <form class="formClass" action="{% url 'add' %}" method="POST"> {% csrf_token %}
                         <div class="form-group">
                             <label for="property-id">Property ID:</label>
                             <input type="number" name="property-id" style="max-width: 70%;">
@@ -143,7 +145,7 @@
                         </div>
                         <div class="form-group">
                             <label for="transaction-id">Transaction ID:</label>
-                            <input type="number" name="style" style="max-width: 70%;">
+                            <input type="number" name="transaction-id" style="max-width: 70%;">
                         </div>
                         <div class="form-group">
                             <label for="parking-spot">Parking Spot:</label>
