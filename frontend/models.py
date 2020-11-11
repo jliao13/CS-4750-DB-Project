@@ -36,6 +36,7 @@ class company(models.Model):
     password = models.CharField(max_length=255, null=False)
     class Meta:
         db_table = 'company'
+        db_table = 'company'
 
 class apartment_parking_spots(models.Model):
     property_id = models.IntegerField(primary_key=True, null=False)
@@ -66,7 +67,7 @@ class vehicle(models.Model):
     license_plate = models.CharField(max_length=255, primary_key=True, null=False)
     model = models.CharField(max_length=255, null=True)
     brand = models.CharField(max_length=255, null=True)
-    transaction_id = models.ForeignKey(lease_tenants, on_delete=models.CASCADE)
+    transaction = models.ForeignKey(lease_tenants, on_delete=models.CASCADE)
     class Meta:
         db_table = 'vehicle'
 
@@ -75,25 +76,30 @@ class lease(models.Model):
     price = models.FloatField(null=False)
     start_date = models.CharField(max_length=255, null=True)
     end_date = models.CharField(max_length=255, null=True)
-    user_id = models.ForeignKey(company, on_delete=models.CASCADE)
+    user = models.ForeignKey(company, on_delete=models.CASCADE)
     class Meta:
         db_table = 'lease'
 
 class manager(models.Model):
-    employee_id = models.CharField(max_length=255, primary_key=True, null=False)
+    employee_id = models.IntegerField(primary_key=True, null=False)
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255, null=True)
-    user_id = models.ForeignKey(company, on_delete=models.CASCADE)
+    user = models.ForeignKey(company, on_delete=models.CASCADE)
     class Meta:
         db_table = 'manager'
+
+    def __eq__(self, other):
+        values = [(k, v) for k, v in self.__dict__.items() if k != '_state']
+        other_values = [(k, v) for k, v in other.__dict__.items() if k != '_state']
+        return values == other_values
 
 class apartment(models.Model):
     property_id = models.IntegerField(primary_key=True, null=False)
     apartment_number = models.IntegerField(null=False)
     style = models.CharField(max_length=255, null=False)
-    Square_feet = models.IntegerField(null=False)
-    transaction_id = models.ForeignKey(lease_tenants, on_delete=models.CASCADE)
+    square_feet = models.IntegerField(null=False)
+    transaction = models.ForeignKey(lease_tenants, on_delete=models.CASCADE)
     class Meta:
         db_table = 'apartment'
         unique_together = (('property_id','apartment_number'),)

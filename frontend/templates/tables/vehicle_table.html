@@ -1,0 +1,20 @@
+<table style="width:100%; height:100%;">
+    <tr>
+        <th>License Plate</th>
+        <th>Model</th>
+        <th>Brand</th>
+        <th>Transaction</th>
+    </tr>
+    {% for v in vehicles%}
+    <tr>
+        <td>{{v.license_plate}}</td>
+        <td>{{v.model}}</td>
+        <td>{{v.brand}}</td>
+        <td>{{v.transaction_id}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<!--license_plate = models.CharField(max_length=255, primary_key=True, null=False)
+    model = models.CharField(max_length=255, null=True)
+    brand = models.CharField(max_length=255, null=True)
+    transaction-->
