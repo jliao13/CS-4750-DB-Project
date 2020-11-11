@@ -1,3 +1,5 @@
 .env
 cloud_sbbql_proxy.exe
 venv
+.idea
+venv

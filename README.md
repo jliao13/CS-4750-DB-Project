@@ -28,3 +28,9 @@ Run on desktop to run sql proxy:
 ```
 ./cloud_sql_proxy -instances=cs-4750-db-292115:us-east4:cville-leasing-project-db=tcp:3306
 ```
+
+## Set up Python Virtual Environment
+```
+python -m virtualenv venv
+pip install -r requirements.txt
+```
