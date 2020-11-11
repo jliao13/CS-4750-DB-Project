@@ -3,13 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="aac1339c-b23a-4478-8f21-f5d47649348e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/general_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/general_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/lease_tenants_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/lease_tenants_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/manager_phone_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/manager_phone_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/managers_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/managers_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/manages_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/manages_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/property_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/property_table.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/templates/tables/provides_table.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/templates/tables/provides_table.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
