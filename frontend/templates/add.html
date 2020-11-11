@@ -63,15 +63,17 @@
                             <label for="employee-id">Employee ID:</label>
                             <input type="number" name="employee-id" style="max-width: 70%;" id = "employee-id">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
                         <div class="form-group">
-                            <label for="first-name">First Name:</label>
-                            <input type="text" name="first-name" style="max-width: 70%;" id = "first-name">
+                            <label for="fname">First Name:</label>
+                            <input type="text" name="fname" style="max-width: 70%;" id = "fname">
                         </div>
-                        <div class="form-group">
-                            <label for="last-name">Last Name:</label>
-                            <input type="text" name="last-name" style="max-width: 70%;" id = "last-name">
+
+                         <div class="form-group">
+                            <label for="lname">Last Name:</label>
+                            <input type="text" name="lname" style="max-width: 70%;" id = "lname">
                         </div>
+
                         <div class="form-group">
                             <label for="email">Email:</label>
                             <input type="text" name="email" style="max-width: 70%;" id = "email">
@@ -80,56 +82,39 @@
                             <label for="phone-number">Phone Number:</label>
                             <input type="tel" name="phone-number" style="max-width: 70%;" id = "phone-number">
                         </div>
+
                         <h4>Amenities</h4>
                         <div class="form-group">
                             <label for="amenities-id">Amenities ID:</label>
                             <input type="number" name="amenities-id" style="max-width: 70%;" id = "amenities-id">
                         </div>
                         <div class="form-group">
-                            <a>Pet-Friendly:</a>
-                            <form>
-                                <input type="radio" id="pet-friendly-yes" name="pet-friendly" value="yes">
-                                <label for="pet-friendly-yes">Yes</label>
-                                <input type="radio" id="pet-friendly-no" name="pet-friendly" value="no">
-                                <label for="pet-friendly-no">No</label>
-                            </form>
+                            <label for="Pet-Friendly">Pet-Friendly:</label>
+                            <input type="Boolean" name="pet-friendly" style="max-width: 70%;" id = "Pet-Friendly"
+                            placeholder="1 for Yes. 0 for No">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dryer-washer">Dryer/Washer:</label>
+                            <input type="Boolean" name="dryer-washer" style="max-width: 70%;" id = "dryer-washer"
+                            placeholder="1 for Yes. 0 for No">
                         </div>
                         <div class="form-group">
-                            <a>Dryer/Washer:</a>
-                            <form>
-                                <input type="radio" id="dryer-washer-yes" name="dryer-washer" value="yes">
-                                <label for="dryer-washer-yes">Yes</label>
-                                <input type="radio" id="dryer-washer-no" name="dryer-washer" value="no">
-                                <label for="dryer-washer-no">No</label>
-                            </form>
+                            <label for="ac">AC:</label>
+                            <input type="Boolean" name="ac" style="max-width: 70%;" id = "ac"
+                            placeholder="1 for Yes. 0 for No">
                         </div>
                         <div class="form-group">
-                            <a>AC:</a>
-                            <form>
-                                <input type="radio" id="ac-yes" name="ac" value="yes">
-                                <label for="ac-yes">Yes</label>
-                                <input type="radio" id="ac-no" name="ac" value="no">
-                                <label for="ac-no">No</label>
-                            </form>
+                            <label for="heating">Heating:</label>
+                            <input type="Boolean" name="heating" style="max-width: 70%;" id = "heating"
+                            placeholder="1 for Yes. 0 for No">
                         </div>
                         <div class="form-group">
-                            <a>Heating:</a>
-                            <form>
-                                <input type="radio" id="heating-yes" name="heating" value="yes">
-                                <label for="heating-yes">Yes</label>
-                                <input type="radio" id="heating-no" name="heating" value="no">
-                                <label for="heating-no">No</label>
-                            </form>
+                            <label for="internet">Internet:</label>
+                            <input type="Boolean" name="internet" style="max-width: 70%;" id = "internet"
+                            placeholder="1 for Yes. 0 for No">
                         </div>
-                        <div class="form-group">
-                            <a>Internet:</a>
-                            <form>
-                                <input type="radio" id="internet-yes" name="internet" value="yes">
-                                <label for="internet-yes">Yes</label>
-                                <input type="radio" id="internet-no" name="internet" value="no">
-                                <label for="internet-no">No</label>
-                            </form>
-                        </div>
+
                         <h4>Apartment</h4>
                         <div class="form-group">
                             <label for="apartment-number">Apartment Number:</label>
@@ -164,9 +149,11 @@
                             <input type="date" name="end-date" style="max-width: 70%;" id = "end-date">
                         </div>
                         <div class="form-group">
-                            <label for="tenant-name">Tenant:</label>
+                            <label for="tenant-name">Tenant Name:</label>
                             <input type="text" name="tenant-name" style="max-width: 70%;" id = "tenant-name">
                         </div>
+
+                        <h4>Vehicle</h4>
                         <div class="form-group">
                             <label for="license-plate">License Plate:</label>
                             <input type="text" name="license-plate" style="max-width: 70%;" id = "license-plate">
@@ -179,6 +166,7 @@
                             <label for="brand">Brand:</label>
                             <input type="text" name="brand" style="max-width: 70%;" id ="brand" >
                         </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
 
                      </form>
 
