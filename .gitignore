@@ -3,3 +3,4 @@ cloud_sbbql_proxy.exe
 venv
 .idea
 venv
+.DS_Store
