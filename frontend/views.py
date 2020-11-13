@@ -109,7 +109,6 @@ def create_general_table(properties, apartments, manage_props, managers, provide
                         print(row)
                         table.append(row)
                         row = {}
-    print(table)
     return table
 
 # Add this view
