@@ -12,13 +12,9 @@
     </tr>
     {% for p in properties %}
     <tr>
-        <td>{{p.property_id}}</td>
-        <td>{{p.street_name}}</td>
-        <td>{{p.name}}</td>
-        <td>{{p.street_number}}</td>
-        <td>{{p.city}}</td>
-        <td>{{p.state}}</td>
-        <td>{{p.zip_code}}</td>
+        {% for key,value in p.items %}
+        <td>{{value}}</td>
+        {% endfor %}
     </tr>
     {% endfor %}
 </table>

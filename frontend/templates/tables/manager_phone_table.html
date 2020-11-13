@@ -7,8 +7,9 @@
     </tr>
     {% for m in m_phone %}
     <tr>
-        <td>{{m.employee_id}}</td>
-        <td>{{m.phone_number}}</td>
+        {% for key,value in m.items %}
+        <td>{{value}}</td>
+        {% endfor %}
     </tr>
 
     {% endfor %}

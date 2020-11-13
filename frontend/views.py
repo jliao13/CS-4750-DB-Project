@@ -66,47 +66,178 @@ class LoginView(TemplateView):
     def get(self, request, **kwargs):           
         return render(request, 'login.html', context=None)
 
+def dictfetchall(cursor):
+    "Returns all rows from a cursor as a dict"
+    desc = cursor.description
+    return [
+            dict(zip([col[0] for col in desc], row))
+            for row in cursor.fetchall()
+    ]
+
+def create_general_table(properties, apartments, manage_props, managers, provides_amenities, amenities_list, leases):
+    # property apartment manage_props managers provides
+    # amenities lease
+    table = []
+    for prop in properties:
+        row= {}
+        for apt in apartments:
+            if prop['property_id'] == apt['property_id']:
+                for mp in manage_props:
+                    if mp['property_id'] == prop['property_id']:
+                        for man in managers:
+                            if int(man['employee_id']) == mp['employee_id']:
+                                row['property_id'] = prop['property_id']
+                                row['name'] = prop['name']
+                                row['employee_id'] = man['employee_id']
+                                row['first_name'] = man['first_name']
+                                row['last_name'] = man['last_name']
+                                row['email'] = man['email']
+                for prov in provides_amenities:
+                    if prov['property_id'] == prop['property_id']:
+                        for am in amenities_list:
+                            if prov['amenities_id'] == am['amenities_id']:
+                                row['amenities_id'] = am['amenities_id']
+                row['apartment_number'] = apt['apartment_number']
+                row['style'] = apt['style']
+                for l in leases:
+                    if l['transaction_id'] == apt['transaction_id']:
+                        row['square_feet'] = apt[
+                            'Square_feet']  # change to square_feet with new database. Old dtabase had Square_feet
+                        row['transaction_id'] = apt['transaction_id']
+                        row['start_date'] = l['start_date']
+                        row['end_date'] = l['end_date']
+                        print(row)
+                        table.append(row)
+                        row = {}
+    return table
+
 # Add this view
 class DataView(TemplateView):
 
     def get(self, request, **kwargs):
         try:
             if request.session['username']!=None:
-                comp = company.objects.all()
-                tenants = lease_tenants.objects.all()
-                m_phone = manager_phone.objects.all()
-                properties = property.objects.all()
-                managers = manager.objects.all()
-                manage_props = manages.objects.all()
-                ameneties_list = amenities.objects.all()
-                provides_amenities = provides.objects.all()
-                apartments = apartment.objects.all()
-                leases = lease.objects.all()
-                spots = apartment_parking_spots.objects.all()
-                vehicles = vehicle.objects.all()
+                cursor = connection.cursor()
+                # company
+                cursor.execute('SELECT * from company')
+                comp = dictfetchall(cursor)
+                print('comp')
+
+                # lease_tenants
+                cursor.execute('SELECT * from lease_tenants')
+                tenants = dictfetchall(cursor)
+                print('ten')
+
+                # manager_phone
+                cursor.execute('SELECT * from manager_phone')
+                m_phone = dictfetchall(cursor)
+                print('mp')
+
+                # property
+                cursor.execute('SELECT * from property')
+                properties = dictfetchall(cursor)
+                print('prop')
+
+                # mangers
+                cursor.execute('SELECT * from manager')
+                managers = dictfetchall(cursor)
+                print('man')
+                print(managers)
+
+                # manages
+                cursor.execute('SELECT * from manages')
+                manage_props = dictfetchall(cursor)
+                print('mans')
+                print(manage_props)
+
+                # amenities
+                cursor.execute('SELECT * from amenities')
+                amenities_list = dictfetchall(cursor)
+                print('am')
+
+                # provides_amenities
+                cursor.execute('SELECT * from provides')
+                provides_amenities = dictfetchall(cursor)
+                print('provs')
+
+                # apartment
+                cursor.execute('SELECT * from apartment')
+                apartments = dictfetchall(cursor)
+                print('apt')
+
+                # lease
+                cursor.execute('SELECT * from lease')
+                leases = dictfetchall(cursor)
+                print('le')
+
+                # apartment_parking_spots
+                cursor.execute('SELECT * from apartment_parking_spots')
+                spots = dictfetchall(cursor)
+                print('sp')
+
+                # vehicle
+                cursor.execute('SELECT * from vehicle')
+                vehicles = dictfetchall(cursor)
+                print('v')
+                cursor.close()
+
+                general_table = create_general_table(properties, apartments, manage_props, managers, provides_amenities,
+                                                     amenities_list, leases)
 
                 return render(request, 'data.html', {'comp': comp, 'tenants': tenants, 'm_phone': m_phone, 'properties':
-                    properties, 'managers': managers, 'manage_props': manage_props, 'amenities': ameneties_list, 'provides':
-                    provides_amenities, 'apartments': apartments, 'leases': leases, 'parking_spots': spots, 'vehicles': vehicles})
+                    properties, 'managers': managers, 'manage_props': manage_props, 'amenities': amenities_list, 'provides':
+                    provides_amenities, 'apartments': apartments, 'leases': leases, 'parking_spots': spots, 'vehicles': vehicles, 'general_table': general_table})
             else:
+                print("ugh")
                 return redirect('loginPage')
         except:
+            print("nope")
             return redirect('loginPage')
 
-    
-    def delete(request, property_id, apartment_number):
-        apartment.objects.filter(property_id=property_id, apartment_number=apartment_number).delete()
-        return redirect("/../data")
-
-    def update(request):
+    def update_managers_table(request):
         if request.method == "POST":
-            transaction_id = request.POST.get("transaction-id")
-            tenants = request.POST.get("tenant-name")
+            e_id = request.POST.get("employee-id")
+            f_name = request.POST.get("fname")
+            l_name = request.POST.get("lname")
+            email = request.POST.get("email")
+            user_id = request.POST.get("user-id")
 
-            table1 = lease_tenants(transaction_id=transaction_id, tenant_name=tenants)
-            table1.save()
+            cursor = connection.cursor()
+            cursor.execute("UPDATE manager SET employee_id=%s, first_name=%s, last_name=%s, email=%s WHERE employee_id=%s AND user_id=%s", [e_id,f_name,l_name,email,e_id,user_id])
         return redirect("/../data")
 
+    def delete_managers_table(request):
+        if request.method == "POST":
+            e_id = request.POST.get("employee_id")
+            user_id = request.POST.get("user-id")
+
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM manager WHERE employee_id=%s AND user_id=%s", [e_id,user_id])
+        return redirect("/../data")
+
+    def update_lease_tenants_table(request):
+        if request.method == "POST":
+            t_id = request.POST.get("transaction-id")
+            t_name = request.POST.get("tenant-name")  
+            old_t_name = request.POST.get("old-tenant-name")
+
+            cursor = connection.cursor()
+            # cursor.execute("UPDATE lease_tenants SET transaction_id=%s, tenant_name=%s WHERE transaction_id=%s", [t_id,t_name,t_id])
+            # it won't work if two people share the same transaction id.
+            cursor.execute("UPDATE lease_tenants SET transaction_id=%s, tenant_name=%s WHERE transaction_id=%s AND tenant_name=%s", [t_id,t_name,t_id,old_t_name])
+        return redirect("/../data")
+
+    def delete_lease_tenants_table(request):
+        if request.method == "POST":
+            t_id = request.POST.get("transaction-id")
+            t_name = request.POST.get("tenant-name") 
+
+            cursor = connection.cursor()
+            # it only allows me to delete all tenants that share the same transaction id.
+            cursor.execute("DELETE FROM lease_tenants WHERE transaction_id=%s", [t_id])
+            # cursor.execute("DELETE FROM lease_tenants WHERE transaction_id=%s AND tenant_name=%s", [t_id,t_name])
+        return redirect("/../data")
+        
 
 class AddView(TemplateView):
 
@@ -202,7 +333,6 @@ class AddView(TemplateView):
                 return redirect('loginPage')
         except:
             return redirect('loginPage')
-
 
 # class FinishRealPageView(TemplateView):
 #     template_name = "finishreal.html"

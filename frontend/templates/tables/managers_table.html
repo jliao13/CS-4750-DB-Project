@@ -7,14 +7,72 @@
         <th>Last name</th>
         <th>Email</th>
         <th>User Id</th>
+        <th>Edit?</th>
+        <th>Delete?</th>
     </tr>
     {% for man in managers %}
     <tr>
-        <td>{{man.employee_id}}</td>
-        <td>{{man.first_name}}</td>
-        <td>{{man.last_name}}</td>
-        <td>{{man.email}}</td>
-        <td>{{man.user_id}}</td>
+        {% for key,value in man.items %}
+        <td>{{value}}</td>
+        {% endfor %}
+        <td>
+            <!-- Trigger the modal with a button -->
+            <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#myModal_managers_table">
+            Edit
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal_managers_table" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Make Change to Managers Table</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                      <form class="formClass" action="{% url 'update_managers_table' %}" method="POST">{% csrf_token %}
+                        <div class="form-group">
+                            <label for="employee-id">Employee ID:</label>
+                            <input type="number" name="employee-id" style="max-width: 70%;" id = "employee-id" placeholder={{man.employee_id}}>
+                        </div>
+                        <div class="form-group">
+                            <label for="fname">First Name:</label>
+                            <input type="text" name="fname" style="max-width: 70%;" id = "fname" placeholder={{man.first_name}}>
+                        </div>
+
+                         <div class="form-group">
+                            <label for="lname">Last Name:</label>
+                            <input type="text" name="lname" style="max-width: 70%;" id = "lname" placeholder={{man.last_name}}>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" name="email" style="max-width: 70%;" id = "email" placeholder={{man.email}}>
+                        </div>
+                        <div>
+                            <input type="hidden" name="user-id" id="user-id" value={{man.user_id}}>
+                        </div>
+                        <div>
+                            <input type="hidden" name="employee_id" id="employee_id" value={{man.employee_id}}>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                     </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </td>
+            <td>
+                <form class="formClass" action="{% url 'delete_managers_table' %}" method="POST">{% csrf_token %}
+                    <div>
+                        <input type="hidden" name="user-id" id="user-id" value={{man.user_id}}>
+                    </div>
+                    <div>
+                            <input type="hidden" name="employee_id" id="old-employee-id" value={{man.employee_id}}>
+                        </div>
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
+            </td>
     </tr>
     {% endfor %}
 </table>

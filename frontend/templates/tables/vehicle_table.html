@@ -7,12 +7,11 @@
         <th>Brand</th>
         <th>Transaction</th>
     </tr>
-    {% for v in vehicles%}
+    {% for v in vehicles %}
     <tr>
-        <td>{{v.license_plate}}</td>
-        <td>{{v.model}}</td>
-        <td>{{v.brand}}</td>
-        <td>{{v.transaction_id}}</td>
+        {% for key,value in v.items %}
+        <td>{{value}}</td>
+        {% endfor %}
     </tr>
     {% endfor %}
 </table>
