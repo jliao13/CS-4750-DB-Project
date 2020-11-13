@@ -34,3 +34,24 @@
     top: 10%;
     left: 10%;
 }
+
+body, html, #container {
+  height: 100%;
+}
+
+#top_div {
+height:50%;
+width:100%;
+background-color:#009900;
+margin:auto;
+text-align:center;
+}
+
+#bottom_div {
+height:50%;
+width:100%;
+background-color:#990000;
+margin:auto;
+text-align:center;
+color:#FFFFFF;
+}

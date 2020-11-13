@@ -103,6 +103,6 @@ class apartment(models.Model):
     transaction_id = models.IntegerField(null=False)
     class Meta:
         db_table = 'apartment'
-        unique_together = (('property_id','apartment_number'),)
+        unique_together = (('property_id', 'apartment_number'),)
 
 
