@@ -5,6 +5,9 @@ from .models import company, lease_tenants, manager_phone, manages, property, ma
     lease, apartment_parking_spots, vehicle
 from django.http.response import HttpResponse
 from django.db import connection, transaction
+import csv, io
+from django.contrib import messages
+
 
 # Create your views here.
 class LoginView(TemplateView):
@@ -254,7 +257,6 @@ class AddView(TemplateView):
         try:
             if request.session['username']!=None:
                 if request.method == "POST":
-                    cursor = connection.cursor()
                     pid = request.POST.get("property-id")
                     p_name = request.POST.get("property-name")
                     street_number = request.POST.get("street-number")
@@ -285,54 +287,146 @@ class AddView(TemplateView):
                     license_plate = request.POST.get("license-plate")
                     model = request.POST.get("model")
                     brand = request.POST.get("brand")
+                    user_id = request.session['user_id']
 
-                    table1 = lease_tenants(transaction_id=transaction_id, tenant_name=tenants)
-                    table1.save()
 
-                    table2 = manager_phone(employee_id=employee_id, phone_number=phone_number)
-                    table2.save()
+                    cursor = connection.cursor()
 
-                    table3 = manages(property_id=pid, employee_id=employee_id)
-                    table3.save()
+                    cursor.execute("INSERT INTO lease(transaction_id,price,start_date,end_date,user_id) "
+                                   "VALUES( %s , %s , %s, %s, %s)", [transaction_id, price, start_date, end_date,
+                                                                     user_id])
 
-                    table4 = property(property_id=pid, name=p_name, street_number=street_number,
-                                    street_name=street_name, city=city, state=state, zip_code=zip_code)
-                    table4.save()
+                    cursor.execute("INSERT INTO manager(employee_id,first_name,last_name,email,user_id) "
+                                   "VALUES( %s , %s , %s, %s, %s)", [employee_id, fname, lname, email,
+                                                                     user_id])
 
-                    table6 = apartment_parking_spots(property_id=pid, parking_spot=parking_spot, apartment_number=a_number)
-                    table6.save()
+                    cursor.execute("INSERT INTO lease_tenants(transaction_id,tenant_name) VALUES( %s , %s )",
+                                   [transaction_id, tenants])
 
-                    table7 = provides(property_id=pid, amenities_id=amenities_id)
-                    table7.save()
+                    cursor.execute("INSERT INTO manager_phone(employee_id,phone_number) VALUES( %s , %s )",
+                                   [employee_id, phone_number])
 
-                    table8 = amenities(amenities_id=amenities_id, pet_friendly=pet, dryer_washer=dryer,
-                                        ac=ac, heating=heating, internet=internet)
-                    table8.save()
+                    cursor.execute("INSERT INTO manages(property_id,employee_id) VALUES( %s , %s )",
+                                   [pid, employee_id])
 
-                    table9 = vehicle(license_plate=license_plate, model=model, brand=brand,
-                                    transaction_id=transaction_id)
-                    table9.save()
+                    cursor.execute("INSERT INTO property(property_id,name,street_number,street_name,"
+                                   "city,state,zip_code) VALUES( %s , %s, %s , %s , %s , %s ,%s )",
+                                   [pid, p_name, street_number, street_name, city, state, zip_code])
 
-                    table10 = lease(transaction_id=transaction_id, price=price, start_date=start_date,
-                                    end_date=end_date, user_id=1)
-                    table10.save()
+                    cursor.execute("INSERT INTO apartment_parking_spots(property_id,parking_spot,apartment_number) "
+                                   "VALUES( %s , %s , %s)", [pid, parking_spot, a_number])
 
-                    table11 = manager(employee_id=employee_id, first_name=fname, last_name=lname,
-                                    email=email, user_id=1)
-                    table11.save()
+                    cursor.execute("INSERT INTO provides(property_id,amenities_id) VALUES( %s , %s )",
+                                   [pid, amenities_id])
 
-                    table12 = apartment(property_id=pid, apartment_number=a_number, style=style,
-                                        square_feet=square_feet, transaction_id=transaction_id)
-                    table12.save()
+                    cursor.execute("INSERT INTO amenities(amenities_id,pet_friendly,dryer_washer,ac,"
+                                   "heating,internet) VALUES( %s , %s, %s , %s , %s , %s )",
+                                   [amenities_id, pet, dryer, ac, heating, internet])
+
+                    cursor.execute("INSERT INTO vehicle(license_plate,model,brand,transaction_id) "
+                                   "VALUES( %s , %s , %s, %s)", [license_plate, model, brand, transaction_id])
+
+                    cursor.execute("INSERT INTO apartment(property_id,apartment_number,style,square_feet,transaction_id) "
+                                   "VALUES( %s , %s , %s, %s, %s)", [pid, a_number, style, square_feet,
+                                                                     transaction_id])
 
 
                     return render(request, 'add.html', {"message": "inserted!"})
                 else:
                     return render(request, 'add.html', context=None)
             else:
-                return redirect('loginPage')
+                return redirect('add')
         except:
-            return redirect('loginPage')
+            return redirect('add')
+
+    def upload(request):
+        try:
+            cursor = connection.cursor()
+            if request.method == "GET":
+                return render(request, 'add.html', context=None)
+            if request.method == "POST":
+                csv_file = request.FILES['file']
+                if not csv_file.name.endswith('.csv'):
+                    messages.error(request, 'THIS IS NOT A CSV FILE')
+                data_set = csv_file.read().decode('UTF-8')
+                io_string = io.StringIO(data_set)
+                next(io_string)
+                for column in csv.reader(io_string, delimiter=',', quotechar="|"):
+                    pid = column[0]
+                    p_name = column[1]
+                    street_number = column[2]
+                    street_name = column[3]
+                    city = column[4]
+                    state = column[5]
+                    zip_code = column[6]
+                    employee_id = column[7]
+                    fname = column[8]
+                    lname = column[9]
+                    email = column[10]
+                    phone_number = column[11]
+                    amenities_id = column[12]
+                    pet = column[13]
+                    dryer = column[14]
+                    ac = column[15]
+                    heating = column[16]
+                    internet = column[17]
+                    a_number = column[18]
+                    style = column[19]
+                    square_feet = column[20]
+                    transaction_id = column[21]
+                    parking_spot = column[22]
+                    price = column[23]
+                    start_date = column[24]
+                    end_date = column[25]
+                    tenants = column[26]
+                    license_plate = column[27]
+                    model = column[28]
+                    brand = column[29]
+                    user_id = request.session['user_id']
+
+                    cursor.execute("INSERT INTO lease(transaction_id,price,start_date,end_date,user_id) "
+                                   "VALUES( %s , %s , %s, %s, %s)", [transaction_id, price, start_date, end_date,
+                                                                     user_id])
+
+                    cursor.execute("INSERT INTO manager(employee_id,first_name,last_name,email,user_id) "
+                                   "VALUES( %s , %s , %s, %s, %s)", [employee_id, fname, lname, email,
+                                                                     user_id])
+
+                    cursor.execute("INSERT INTO lease_tenants(transaction_id,tenant_name) VALUES( %s , %s )",
+                                   [transaction_id, tenants])
+
+                    cursor.execute("INSERT INTO manager_phone(employee_id,phone_number) VALUES( %s , %s )",
+                                   [employee_id, phone_number])
+
+                    cursor.execute("INSERT INTO manages(property_id,employee_id) VALUES( %s , %s )",
+                                   [pid, employee_id])
+
+                    cursor.execute("INSERT INTO property(property_id,name,street_number,street_name,"
+                                   "city,state,zip_code) VALUES( %s , %s, %s , %s , %s , %s ,%s )",
+                                   [pid, p_name, street_number, street_name, city, state, zip_code])
+
+                    cursor.execute("INSERT INTO apartment_parking_spots(property_id,parking_spot,apartment_number) "
+                                   "VALUES( %s , %s , %s)", [pid, parking_spot, a_number])
+
+                    cursor.execute("INSERT INTO provides(property_id,amenities_id) VALUES( %s , %s )",
+                                   [pid, amenities_id])
+
+                    cursor.execute("INSERT INTO amenities(amenities_id,pet_friendly,dryer_washer,ac,"
+                                   "heating,internet) VALUES( %s , %s, %s , %s , %s , %s )",
+                                   [amenities_id, pet, dryer, ac, heating, internet])
+
+                    cursor.execute("INSERT INTO vehicle(license_plate,model,brand,transaction_id) "
+                                   "VALUES( %s , %s , %s, %s)", [license_plate, model, brand, transaction_id])
+
+                    cursor.execute("INSERT INTO apartment(property_id,apartment_number,style,square_feet,transaction_id) "
+                                   "VALUES( %s , %s , %s, %s, %s)", [pid, a_number, style, square_feet,
+                                                                     transaction_id])
+                return render(request, 'add.html', {"message": "inserted!"})
+            else:
+                return redirect('add')
+        except:
+            return redirect('add')
+
 
 # class FinishRealPageView(TemplateView):
 #     template_name = "finishreal.html"

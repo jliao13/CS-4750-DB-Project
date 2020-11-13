@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^update_lease_tenants_table/$', views.DataView.update_lease_tenants_table, name='update_lease_tenants_table'),
     url(r'^delete_lease_tenants_table/$', views.DataView.delete_lease_tenants_table, name='delete_lease_tenants_table'),
     url(r'^add/$', views.AddView.add, name='add'), # Add this /about/ route
+    url(r'^upload/$', views.AddView.upload, name='upload'),
     # url(r'^finishreal/$', views.FinishRealPageView.as_view()), # Add this /about/ route
     # url(r'^index_copy/$', views.IndexCopyPageView.as_view()), # Add this /about/ route
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
