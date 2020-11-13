@@ -108,8 +108,8 @@ else:
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cville_leasing',
-        'USER': 'Developer',
-        'PASSWORD': 'developer123',
+        'USER': 'Company User',
+        'PASSWORD': 'company123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }
