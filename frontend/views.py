@@ -85,12 +85,12 @@ def create_general_table(properties, apartments, manage_props, managers, provide
         row= {}
         for apt in apartments:
             if prop['property_id'] == apt['property_id']:
+                row['property_id'] = prop['property_id']
+                row['name'] = prop['name']
                 for mp in manage_props:
                     if mp['property_id'] == prop['property_id']:
                         for man in managers:
-                            if int(man['employee_id']) == mp['employee_id']:
-                                row['property_id'] = prop['property_id']
-                                row['name'] = prop['name']
+                            if man['employee_id'] == mp['employee_id']:
                                 row['employee_id'] = man['employee_id']
                                 row['first_name'] = man['first_name']
                                 row['last_name'] = man['last_name']
@@ -109,8 +109,7 @@ def create_general_table(properties, apartments, manage_props, managers, provide
                         row['transaction_id'] = apt['transaction_id']
                         row['start_date'] = l['start_date']
                         row['end_date'] = l['end_date']
-                        print(row)
-                        table.append(row)
+                        if len(row) > 11:table.append(row)
                         row = {}
     return table
 
@@ -121,67 +120,59 @@ class DataView(TemplateView):
         try:
             if request.session['username']!=None:
                 cursor = connection.cursor()
-                # company
+                company_id = request.session['user_id']
                 cursor.execute('SELECT * from company')
                 comp = dictfetchall(cursor)
-                print('comp')
 
                 # lease_tenants
                 cursor.execute('SELECT * from lease_tenants')
+                cursor.execute('SELECT transaction_id, tenant_name from lease NATURAL JOIN lease_tenants WHERE user_id=%s',[company_id])
                 tenants = dictfetchall(cursor)
-                print('ten')
 
                 # manager_phone
-                cursor.execute('SELECT * from manager_phone')
+                cursor.execute('SELECT employee_id, phone_number from manager_phone NATURAL JOIN manager WHERE user_id=%s', [company_id])
                 m_phone = dictfetchall(cursor)
-                print('mp')
 
                 # property
-                cursor.execute('SELECT * from property')
+                cursor.execute('SELECT property_id, name, street_number, city, state, zip_code from property NATURAL JOIN manages NATURAL JOIN manager WHERE user_id=%s', [company_id])
                 properties = dictfetchall(cursor)
-                print('prop')
 
                 # mangers
-                cursor.execute('SELECT * from manager')
+                cursor.execute('SELECT * from manager WHERE user_id=%s', [company_id])
                 managers = dictfetchall(cursor)
-                print('man')
-                print(managers)
 
                 # manages
-                cursor.execute('SELECT * from manages')
+                cursor.execute('SELECT property_id, employee_id from manages NATURAL JOIN manager WHERE user_id=%s', [company_id])
                 manage_props = dictfetchall(cursor)
-                print('mans')
-                print(manage_props)
 
                 # amenities
-                cursor.execute('SELECT * from amenities')
+                cursor.execute('SELECT amenities_id, pet_friendly, dryer_washer, ac, heating, internet from amenities '
+                               'NATURAL JOIN provides NATURAL JOIN property NATURAL JOIN manages NATURAL JOIN manager '
+                               'WHERE user_id=%s', [company_id])
                 amenities_list = dictfetchall(cursor)
-                print('am')
 
                 # provides_amenities
-                cursor.execute('SELECT * from provides')
+                cursor.execute('SELECT property_id, amenities_id from provides NATURAL JOIN property NATURAL JOIN manages '
+                               'NATURAL JOIN manager WHERE user_id=%s', [company_id])
                 provides_amenities = dictfetchall(cursor)
-                print('provs')
 
                 # apartment
-                cursor.execute('SELECT * from apartment')
+                cursor.execute('SELECT property_id, apartment_number,style,square_feet, transaction_id from apartment '
+                               'NATURAL JOIN property NATURAL JOIN manages NATURAL JOIN manager WHERE user_id=%s', [company_id])
                 apartments = dictfetchall(cursor)
-                print('apt')
 
                 # lease
-                cursor.execute('SELECT * from lease')
+                cursor.execute('SELECT * from lease WHERE user_id=%s', [company_id])
                 leases = dictfetchall(cursor)
-                print('le')
 
                 # apartment_parking_spots
-                cursor.execute('SELECT * from apartment_parking_spots')
+                cursor.execute('SELECT property_id,parking_spot,apartment_number from apartment_parking_spots NATURAL JOIN '
+                               'apartment NATURAL JOIN lease WHERE user_id=%s', [company_id])
                 spots = dictfetchall(cursor)
-                print('sp')
 
                 # vehicle
-                cursor.execute('SELECT * from vehicle')
+                cursor.execute('SELECT license_plate, model, brand,transaction_id from vehicle NATURAL JOIN lease WHERE user_id=%s', [company_id])
                 vehicles = dictfetchall(cursor)
-                print('v')
                 cursor.close()
 
                 general_table = create_general_table(properties, apartments, manage_props, managers, provides_amenities,
@@ -191,10 +182,8 @@ class DataView(TemplateView):
                     properties, 'managers': managers, 'manage_props': manage_props, 'amenities': amenities_list, 'provides':
                     provides_amenities, 'apartments': apartments, 'leases': leases, 'parking_spots': spots, 'vehicles': vehicles, 'general_table': general_table})
             else:
-                print("ugh")
                 return redirect('loginPage')
         except:
-            print("nope")
             return redirect('loginPage')
 
     def update_managers_table(request):
