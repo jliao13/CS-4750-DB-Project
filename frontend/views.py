@@ -31,32 +31,35 @@ class LoginView(TemplateView):
             return render(request, 'login.html', context=None)
 
     def create(request):
-        if (request.method == "POST"):
-            user_name=request.POST['n_username']
-            password=request.POST['n_password']
-            
-            #get curr max user_id from table +1
-            cursor = connection.cursor()
-            cursor.execute("SELECT max(user_id) FROM company")
-            myresult = cursor.fetchall()
-            user_id = myresult[0][0]+1
+        try:
+            if (request.method == "POST"):
+                user_name=request.POST['n_username']
+                password=request.POST['n_password']
 
-            #add new user to table
-            cursor.execute("INSERT INTO company(user_id,user_name,password) VALUES( %s , %s, %s)", [user_id, user_name, password])
-
-            try:
+                #get curr max user_id from table +1
                 cursor = connection.cursor()
-                cursor.execute("SELECT user_id FROM company WHERE user_name=%s AND password=%s", [user_name, password])
-                myresults = cursor.fetchall()
-                request.session['username'] = user_name
-                request.session['user_id'] = myresults[0][0]
-                request.session['username'] = user_name
-                print(request.session['user_id'], flush=True)
-                return redirect('add')
-            except:
-                return render(request, 'login.html', context=None)
+                cursor.execute("SELECT max(user_id) FROM company")
+                myresult = cursor.fetchall()
+                user_id = myresult[0][0]+1
 
-        return render(request, 'login.html', context=None)
+                #add new user to table
+                cursor.execute("INSERT INTO company(user_id,user_name,password) VALUES( %s , %s, %s)", [user_id, user_name, password])
+
+                try:
+                    cursor = connection.cursor()
+                    cursor.execute("SELECT user_id FROM company WHERE user_name=%s AND password=%s", [user_name, password])
+                    myresults = cursor.fetchall()
+                    request.session['username'] = user_name
+                    request.session['user_id'] = myresults[0][0]
+                    request.session['username'] = user_name
+                    print(request.session['user_id'], flush=True)
+                    return redirect('add')
+                except:
+                    return render(request, 'login.html', context=None)
+
+            return render(request, 'login.html', context=None)
+        except:
+            return redirect('login')
 
     def logout(request):
         try:
