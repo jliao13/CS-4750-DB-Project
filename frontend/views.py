@@ -78,17 +78,38 @@ def create_general_table(properties, apartments, manage_props, managers, provide
     # property apartment manage_props managers provides
     # amenities lease
     table = []
-    row = {}
     for prop in properties:
+        row= {}
         for apt in apartments:
             if prop['property_id'] == apt['property_id']:
-                row['property_id'] = prop['property_id']
                 for mp in manage_props:
                     if mp['property_id'] == prop['property_id']:
-                        row['employee_id'] = mp['employee_id']
-            # row[prop_key] = prop[prop_key]
-            # table.append(row)
-                table.append(row)
+                        for man in managers:
+                            if int(man['employee_id']) == mp['employee_id']:
+                                row['property_id'] = prop['property_id']
+                                row['name'] = prop['name']
+                                row['employee_id'] = man['employee_id']
+                                row['first_name'] = man['first_name']
+                                row['last_name'] = man['last_name']
+                                row['email'] = man['email']
+                for prov in provides_amenities:
+                    if prov['property_id'] == prop['property_id']:
+                        for am in amenities_list:
+                            if prov['amenities_id'] == am['amenities_id']:
+                                row['amenities_id'] = am['amenities_id']
+                row['apartment_number'] = apt['apartment_number']
+                row['style'] = apt['style']
+                for l in leases:
+                    if l['transaction_id'] == apt['transaction_id']:
+                        row['square_feet'] = apt[
+                            'Square_feet']  # change to square_feet with new database. Old dtabase had Square_feet
+                        row['transaction_id'] = apt['transaction_id']
+                        row['start_date'] = l['start_date']
+                        row['end_date'] = l['end_date']
+                        print(row)
+                        table.append(row)
+                        row = {}
+    print(table)
     return table
 
 # Add this view
@@ -122,11 +143,13 @@ class DataView(TemplateView):
                 cursor.execute('SELECT * from manager')
                 managers = dictfetchall(cursor)
                 print('man')
+                print(managers)
 
                 # manages
                 cursor.execute('SELECT * from manages')
                 manage_props = dictfetchall(cursor)
                 print('mans')
+                print(manage_props)
 
                 # amenities
                 cursor.execute('SELECT * from amenities')
@@ -161,8 +184,6 @@ class DataView(TemplateView):
 
                 general_table = create_general_table(properties, apartments, manage_props, managers, provides_amenities,
                                                      amenities_list, leases)
-                print('tab')
-                print(general_table)
 
                 return render(request, 'data.html', {'comp': comp, 'tenants': tenants, 'm_phone': m_phone, 'properties':
                     properties, 'managers': managers, 'manage_props': manage_props, 'amenities': amenities_list, 'provides':
