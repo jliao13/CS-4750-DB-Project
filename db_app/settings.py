@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = 1
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
@@ -92,9 +92,9 @@ if os.getenv('GAE_APPLICATION', None):
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '/cloudsql/cs-4750-db-292115:us-east4:cville-leasing-project-db',
-            'NAME': config('NAME'),
-            'USER': config('USERNAME'),
-        '   PASSWORD': config('PASSWORD'),
+            'NAME': 'cville_leasing',
+            'USER': 'Veliky Rentals',
+            'PASSWORD': 'veliky123',
         }
     }
 else:
@@ -152,4 +152,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = 'static'
