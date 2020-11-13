@@ -8,13 +8,13 @@
         <th>End date</th>
         <th>User Id</th>
     </tr>
-    {% for l in leases%}
+    {% for a in apartments %}
     <tr>
-        <td>{{l.transaction_id}}</td>
-        <td>{{l.price}}</td>
-        <td>{{l.start_date}}</td>
-        <td>{{l.end_date}}</td>
-        <td>{{l.user_id}}</td>
+        <td>{{a.property_id}}</td>
+        <td>{{a.apartment_number}}</td>
+        <td>{{a.style}}</td>
+        <td>{{a.square_feet}}</td>
+        <td>{{a.transaction_id}}</td>
     </tr>
     {% endfor %}
 </table>
