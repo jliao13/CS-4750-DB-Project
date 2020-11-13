@@ -194,20 +194,50 @@ class DataView(TemplateView):
             print("nope")
             return redirect('loginPage')
 
-    
-    def delete(request, property_id, apartment_number):
-        apartment.objects.filter(property_id=property_id, apartment_number=apartment_number).delete()
-        return redirect("/../data")
-
-    def update(request):
+    def update_managers_table(request):
         if request.method == "POST":
-            transaction_id = request.POST.get("transaction-id")
-            tenants = request.POST.get("tenant-name")
+            e_id = request.POST.get("employee-id")
+            f_name = request.POST.get("fname")
+            l_name = request.POST.get("lname")
+            email = request.POST.get("email")
+            user_id = request.POST.get("user-id")
 
-            table1 = lease_tenants(transaction_id=transaction_id, tenant_name=tenants)
-            table1.save()
+            cursor = connection.cursor()
+            cursor.execute("UPDATE manager SET employee_id=%s, first_name=%s, last_name=%s, email=%s WHERE employee_id=%s AND user_id=%s", [e_id,f_name,l_name,email,e_id,user_id])
         return redirect("/../data")
 
+    def delete_managers_table(request):
+        if request.method == "POST":
+            e_id = request.POST.get("employee_id")
+            user_id = request.POST.get("user-id")
+
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM manager WHERE employee_id=%s AND user_id=%s", [e_id,user_id])
+        return redirect("/../data")
+
+    def update_lease_tenants_table(request):
+        if request.method == "POST":
+            t_id = request.POST.get("transaction-id")
+            t_name = request.POST.get("tenant-name")  
+            old_t_name = request.POST.get("old-tenant-name")
+
+            cursor = connection.cursor()
+            # cursor.execute("UPDATE lease_tenants SET transaction_id=%s, tenant_name=%s WHERE transaction_id=%s", [t_id,t_name,t_id])
+            # it won't work if two people share the same transaction id.
+            cursor.execute("UPDATE lease_tenants SET transaction_id=%s, tenant_name=%s WHERE transaction_id=%s AND tenant_name=%s", [t_id,t_name,t_id,old_t_name])
+        return redirect("/../data")
+
+    def delete_lease_tenants_table(request):
+        if request.method == "POST":
+            t_id = request.POST.get("transaction-id")
+            t_name = request.POST.get("tenant-name") 
+
+            cursor = connection.cursor()
+            # it only allows me to delete all tenants that share the same transaction id.
+            cursor.execute("DELETE FROM lease_tenants WHERE transaction_id=%s", [t_id])
+            # cursor.execute("DELETE FROM lease_tenants WHERE transaction_id=%s AND tenant_name=%s", [t_id,t_name])
+        return redirect("/../data")
+        
 
 class AddView(TemplateView):
 

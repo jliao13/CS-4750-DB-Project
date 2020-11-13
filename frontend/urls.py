@@ -10,8 +10,11 @@ urlpatterns = [
     url(r'^create/$', views.LoginView.create, name='create'),
     url(r'^logout/$', views.LoginView.logout, name='logout'),
     url(r'^data/$', views.DataView.as_view(), name='data'), # Add this /about/ route
+    url(r'^update_managers_table/$', views.DataView.update_managers_table, name='update_managers_table'),
+    url(r'^delete_managers_table/$', views.DataView.delete_managers_table, name='delete_managers_table'),
+    url(r'^update_lease_tenants_table/$', views.DataView.update_lease_tenants_table, name='update_lease_tenants_table'),
+    url(r'^delete_lease_tenants_table/$', views.DataView.delete_lease_tenants_table, name='delete_lease_tenants_table'),
     url(r'^add/$', views.AddView.add, name='add'), # Add this /about/ route
     # url(r'^finishreal/$', views.FinishRealPageView.as_view()), # Add this /about/ route
     # url(r'^index_copy/$', views.IndexCopyPageView.as_view()), # Add this /about/ route
-    path('delete/<int:property_id>&<int:apartment_number>', views.DataView.delete),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
