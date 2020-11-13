@@ -7,8 +7,9 @@
     </tr>
     {% for m in manage_props%}
     <tr>
-        <td>{{m.property_id}}</td>
-        <td>{{m.employee_id}}</td>
+        {% for key,value in m.items %}
+        <td>{{value}}</td>
+        {% endfor %}
     </tr>
     {% endfor %}
 </table>

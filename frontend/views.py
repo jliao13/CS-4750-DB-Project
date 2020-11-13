@@ -66,31 +66,112 @@ class LoginView(TemplateView):
     def get(self, request, **kwargs):           
         return render(request, 'login.html', context=None)
 
+def dictfetchall(cursor):
+    "Returns all rows from a cursor as a dict"
+    desc = cursor.description
+    return [
+            dict(zip([col[0] for col in desc], row))
+            for row in cursor.fetchall()
+    ]
+
+def create_general_table(properties, apartments, manage_props, managers, provides_amenities, amenities_list, leases):
+    # property apartment manage_props managers provides
+    # amenities lease
+    table = []
+    row = {}
+    for prop in properties:
+        for apt in apartments:
+            if prop['property_id'] == apt['property_id']:
+                row['property_id'] = prop['property_id']
+                for mp in manage_props:
+                    if mp['property_id'] == prop['property_id']:
+                        row['employee_id'] = mp['employee_id']
+            # row[prop_key] = prop[prop_key]
+            # table.append(row)
+                table.append(row)
+    return table
+
 # Add this view
 class DataView(TemplateView):
 
     def get(self, request, **kwargs):
         try:
             if request.session['username']!=None:
-                comp = company.objects.all()
-                tenants = lease_tenants.objects.all()
-                m_phone = manager_phone.objects.all()
-                properties = property.objects.all()
-                managers = manager.objects.all()
-                manage_props = manages.objects.all()
-                ameneties_list = amenities.objects.all()
-                provides_amenities = provides.objects.all()
-                apartments = apartment.objects.all()
-                leases = lease.objects.all()
-                spots = apartment_parking_spots.objects.all()
-                vehicles = vehicle.objects.all()
+                cursor = connection.cursor()
+                # company
+                cursor.execute('SELECT * from company')
+                comp = dictfetchall(cursor)
+                print('comp')
+
+                # lease_tenants
+                cursor.execute('SELECT * from lease_tenants')
+                tenants = dictfetchall(cursor)
+                print('ten')
+
+                # manager_phone
+                cursor.execute('SELECT * from manager_phone')
+                m_phone = dictfetchall(cursor)
+                print('mp')
+
+                # property
+                cursor.execute('SELECT * from property')
+                properties = dictfetchall(cursor)
+                print('prop')
+
+                # mangers
+                cursor.execute('SELECT * from manager')
+                managers = dictfetchall(cursor)
+                print('man')
+
+                # manages
+                cursor.execute('SELECT * from manages')
+                manage_props = dictfetchall(cursor)
+                print('mans')
+
+                # amenities
+                cursor.execute('SELECT * from amenities')
+                amenities_list = dictfetchall(cursor)
+                print('am')
+
+                # provides_amenities
+                cursor.execute('SELECT * from provides')
+                provides_amenities = dictfetchall(cursor)
+                print('provs')
+
+                # apartment
+                cursor.execute('SELECT * from apartment')
+                apartments = dictfetchall(cursor)
+                print('apt')
+
+                # lease
+                cursor.execute('SELECT * from lease')
+                leases = dictfetchall(cursor)
+                print('le')
+
+                # apartment_parking_spots
+                cursor.execute('SELECT * from apartment_parking_spots')
+                spots = dictfetchall(cursor)
+                print('sp')
+
+                # vehicle
+                cursor.execute('SELECT * from vehicle')
+                vehicles = dictfetchall(cursor)
+                print('v')
+                cursor.close()
+
+                general_table = create_general_table(properties, apartments, manage_props, managers, provides_amenities,
+                                                     amenities_list, leases)
+                print('tab')
+                print(general_table)
 
                 return render(request, 'data.html', {'comp': comp, 'tenants': tenants, 'm_phone': m_phone, 'properties':
-                    properties, 'managers': managers, 'manage_props': manage_props, 'amenities': ameneties_list, 'provides':
-                    provides_amenities, 'apartments': apartments, 'leases': leases, 'parking_spots': spots, 'vehicles': vehicles})
+                    properties, 'managers': managers, 'manage_props': manage_props, 'amenities': amenities_list, 'provides':
+                    provides_amenities, 'apartments': apartments, 'leases': leases, 'parking_spots': spots, 'vehicles': vehicles, 'general_table': general_table})
             else:
+                print("ugh")
                 return redirect('loginPage')
         except:
+            print("nope")
             return redirect('loginPage')
 
     
@@ -202,7 +283,6 @@ class AddView(TemplateView):
                 return redirect('loginPage')
         except:
             return redirect('loginPage')
-
 
 # class FinishRealPageView(TemplateView):
 #     template_name = "finishreal.html"

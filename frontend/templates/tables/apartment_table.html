@@ -10,11 +10,9 @@
     </tr>
     {% for a in apartments %}
     <tr>
-        <td>{{a.property_id}}</td>
-        <td>{{a.apartment_number}}</td>
-        <td>{{a.style}}</td>
-        <td>{{a.square_feet}}</td>
-        <td>{{a.transaction_id}}</td>
+        {% for key,value in a.items %}
+        <td>{{value}}</td>
+        {% endfor %}
     </tr>
     {% endfor %}
 </table>

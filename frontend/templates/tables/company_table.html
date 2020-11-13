@@ -1,14 +1,14 @@
 <br>
-<h1 class="center">Apartment Parking Spots Table</h1>
+<h1 class="center">Companies</h1>
 <table class="center" style="width:100%; height:100%;">
     <tr>
-        <th>Property ID</th>
-        <th>Parking Spot</th>
-        <th>Apartment Number</th>
+        <th>User Id</th>
+        <th>Username</th>
+        <th>Password</th>
     </tr>
-    {% for spot in parking_spots %}
+    {% for c in comp %}
     <tr>
-        {% for key,value in spot.items %}
+        {% for key,value in c.items %}
         <td>{{value}}</td>
         {% endfor %}
     </tr>

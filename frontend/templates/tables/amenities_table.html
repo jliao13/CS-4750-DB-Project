@@ -9,14 +9,11 @@
         <th>Heating</th>
         <th>Internet</th>
     </tr>
-    {% for a in amenities %}
+    {% for a in amenities%}
     <tr>
-        <td>{{a.amenities_id}}</td>
-        <td>{{a.pet_friendly}}</td>
-        <td>{{a.dryer_washer}}</td>
-        <td>{{a.ac}}</td>
-        <td>{{a.heating}}</td>
-        <td>{{a.internet}}</td>
+        {% for key,value in a.items %}
+        <td>{{value}}</td>
+        {% endfor %}
     </tr>
     {% endfor %}
 </table>

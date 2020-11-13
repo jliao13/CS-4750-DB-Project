@@ -10,11 +10,9 @@
     </tr>
     {% for man in managers %}
     <tr>
-        <td>{{man.employee_id}}</td>
-        <td>{{man.first_name}}</td>
-        <td>{{man.last_name}}</td>
-        <td>{{man.email}}</td>
-        <td>{{man.user_id}}</td>
+        {% for key,value in man.items %}
+        <td>{{value}}</td>
+        {% endfor %}
     </tr>
     {% endfor %}
 </table>

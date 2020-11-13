@@ -7,8 +7,9 @@
     </tr>
     {% for p in provides %}
     <tr>
-        <td>{{p.property_id}}</td>
-        <td>{{p.amenities_id}}</td>
+        {% for key,value in p.items %}
+        <td>{{value}}</td>
+        {% endfor %}
     </tr>
     {% endfor %}
 </table>

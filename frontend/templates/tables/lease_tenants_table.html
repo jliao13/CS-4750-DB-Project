@@ -8,8 +8,9 @@
     </tr>
     {% for ten in tenants %}
     <tr>
-        <td>{{ten.transaction_id}}</td>
-        <td>{{ten.tenant_name}}</td>
+        {% for key,value in ten.items %}
+        <td>{{value}}</td>
+                    {% endfor %}
         <td>
             <!-- Trigger the modal with a button -->
             <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#myModal2">
@@ -42,7 +43,6 @@
             </div>
             </td>
     </tr>
-
     {% endfor %}
 
 </table>
