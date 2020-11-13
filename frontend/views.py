@@ -121,7 +121,7 @@ class DataView(TemplateView):
             if request.session['username']!=None:
                 cursor = connection.cursor()
                 company_id = request.session['user_id']
-                cursor.execute('SELECT * from company')
+                cursor.execute('SELECT * from company WHERE user_id=%s', [company_id])
                 comp = dictfetchall(cursor)
 
                 # lease_tenants
