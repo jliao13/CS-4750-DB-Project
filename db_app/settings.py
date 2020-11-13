@@ -91,7 +91,7 @@ if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/cs-4750-db-292115:us-east4:cville-leasing-project-db',
+            'HOST': '/cloudsql/cs-4750-db-292115:us-east4:cville-db',
             'NAME': 'cville_leasing',
             'USER': 'Veliky Rentals',
             'PASSWORD': 'veliky123',
@@ -108,8 +108,8 @@ else:
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'cville_leasing',
-        'USER': 'Veliky Rentals',
-        'PASSWORD': 'veliky123',
+        'USER': 'Developer',
+        'PASSWORD': 'developer123',
         'HOST': '127.0.0.1',
         'PORT': '3306',
     }

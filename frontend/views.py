@@ -105,7 +105,7 @@ def create_general_table(properties, apartments, manage_props, managers, provide
                 for l in leases:
                     if l['transaction_id'] == apt['transaction_id']:
                         row['square_feet'] = apt[
-                            'Square_feet']  # change to square_feet with new database. Old dtabase had Square_feet
+                            'square_feet']  # change to square_feet with new database. Old dtabase had Square_feet
                         row['transaction_id'] = apt['transaction_id']
                         row['start_date'] = l['start_date']
                         row['end_date'] = l['end_date']
