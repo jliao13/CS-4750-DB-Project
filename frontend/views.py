@@ -178,7 +178,7 @@ class DataView(TemplateView):
                 general_table = create_general_table(properties, apartments, manage_props, managers, provides_amenities,
                                                      amenities_list, leases)
 
-                return render(request, 'data.html', {'comp': comp, 'tenants': tenants, 'm_phone': m_phone, 'properties':
+                return render(request, 'data.html', {'tenants': tenants, 'm_phone': m_phone, 'properties':
                     properties, 'managers': managers, 'manage_props': manage_props, 'amenities': amenities_list, 'provides':
                     provides_amenities, 'apartments': apartments, 'leases': leases, 'parking_spots': spots, 'vehicles': vehicles, 'general_table': general_table})
             else:
