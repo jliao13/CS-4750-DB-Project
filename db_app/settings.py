@@ -93,8 +93,8 @@ if os.getenv('GAE_APPLICATION', None):
             'ENGINE': 'django.db.backends.mysql',
             'HOST': '/cloudsql/cs-4750-db-292115:us-east4:cville-db',
             'NAME': 'cville_leasing',
-            'USER': 'Veliky Rentals',
-            'PASSWORD': 'veliky123',
+            'USER': 'Company User',
+            'PASSWORD': 'company123',
         }
     }
 else:
