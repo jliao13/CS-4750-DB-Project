@@ -45,7 +45,8 @@
     <button onclick="myFunction(10)">Vehicles</button> &nbsp; &nbsp;
     <button onclick="myFunction(11)">Leases</button> &nbsp; &nbsp;
     <button onclick="myFunction(12)">Apartments</button>
-    <button onclick="myFunction(13)">Companies</button>
+    <button onclick="myFunction(13)">Companies</button> &nbsp; &nbsp;
+    <button onclick="myFunction(14)">Retrieve All Apt Info on a Property</button>
 </div>
 <div id="table1">{% include "tables/general_table.html" %}</div>
 <div id="table2">{% include "tables/managers_table.html" %}</div>
@@ -60,9 +61,10 @@
 <div id="table11">{% include "tables/lease_table.html" %}</div>
 <div id="table12">{% include "tables/apartment_table.html" %}</div>
 <div id="table13">{% include "tables/company_table.html" %}</div>
+<div id="table14">{% include "tables/stored_procedure.html" %}</div>
 <script>
 function myFunction(nr) {
-    for (i=1;i<=13;i++){
+    for (i=1;i<=14;i++){
         if(nr==i){
             var s ="table" + i;
             var x = document.getElementById(s);

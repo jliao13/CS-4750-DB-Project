@@ -8,12 +8,71 @@
         <th>AC</th>
         <th>Heating</th>
         <th>Internet</th>
+        <th>Edit?</th>
+        <th>Delete?</th>
     </tr>
     {% for a in amenities%}
     <tr>
         {% for key,value in a.items %}
         <td>{{value}}</td>
         {% endfor %}
+        <td>
+            <!-- Trigger the modal with a button -->
+            <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#myModal_amenities_table">
+            Edit
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal_amenities_table" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Make Change to Amenities Table</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="formClass" action="{% url 'update_amenities_table' %}" method="POST">{% csrf_token %}
+                            <div class="form-group">
+                                <label for="amenities-id">Amenities ID:</label>
+                                <input type="number" name="amenities-id" style="max-width: 70%;" id = "amenities-id" placeholder={{a.amenities_id}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="pet-friendly">Pet friendly:</label>
+                                <input type="Boolean" name="pet-friendly" style="max-width: 70%;" id = "pet-friendly" placeholder="1 for Yes. 0 for No" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="dryer-washer">Dryer/Washer:</label>
+                                <input type="Boolean" name="dryer-washer" style="max-width: 70%;" id = "dryer-washer" placeholder="1 for Yes. 0 for No" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="ac">AC:</label>
+                                <input type="Boolean" name="ac" style="max-width: 70%;" id = "ac" placeholder="1 for Yes. 0 for No" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="heating">Heating:</label>
+                                <input type="Boolean" name="heating" style="max-width: 70%;" id = "heating" placeholder="1 for Yes. 0 for No" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="internet">Internet:</label>
+                                <input type="Boolean" name="internet" style="max-width: 70%;" id = "internet" placeholder="1 for Yes. 0 for No" required>
+                            </div>
+                            <!-- Put in important hidden values -->               
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <form class="formClass" action="{% url 'delete_amenities_table' %}" method="POST">{% csrf_token %} 
+                <!-- Put in important hidden values -->   
+                <div>
+                    <input type="hidden" name="amenities-id" id="amenities-id" value={{a.amenities_id}}>
+                </div>                
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>
