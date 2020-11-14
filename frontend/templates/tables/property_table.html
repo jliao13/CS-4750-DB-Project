@@ -5,15 +5,79 @@
         <th>Property ID</th>
         <th>Name</th>
         <th>Street Number</th>
+        <th>Street Name</th>
         <th>City</th>
         <th>State</th>
         <th>Zip Code</th>
+        <th>Edit?</th>
+        <th>Delete?</th>
     </tr>
     {% for p in properties %}
     <tr>
         {% for key,value in p.items %}
         <td>{{value}}</td>
         {% endfor %}
+        <td>
+            <!-- Trigger the modal with a button -->
+            <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#myModal_property_table">
+            Edit
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal_property_table" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Make Change to Property Table</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="formClass" action="{% url 'update_property_table' %}" method="POST">{% csrf_token %}
+                            <div class="form-group">
+                                <label for="property-id">Property ID:</label>
+                                <input type="number" name="property-id" style="max-width: 70%;" id = "property-id" placeholder={{p.property_id}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="property-name">Property Name:</label>
+                                <input type="text" name="property-name" style="max-width: 70%;" id = "property-name" placeholder={{p.name}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="street-number">Street Number:</label>
+                                <input type="number" name="street-number" style="max-width: 70%;" id = "street-number" placeholder={{p.street_number}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="street-name">Street Name:</label>
+                                <input type="text" name="street-name" style="max-width: 70%;" id = "street-name" placeholder={{p.street_name}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City:</label>
+                                <input type="text" name="city" style="max-width: 70%;" id = "city" placeholder={{p.city}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State:</label>
+                                <input type="text" name="state" style="max-width: 70%;" id = "state" placeholder={{p.state}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="zip-code">Zip code:</label>
+                                <input type="number" name="zip-code" style="max-width: 70%;" id = "zip-code" placeholder={{p.zip_code}} required>
+                            </div>
+                            <!-- Put in important hidden values -->               
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <form class="formClass" action="{% url 'delete_property_table' %}" method="POST">{% csrf_token %} 
+                <!-- Put in important hidden values -->   
+                <div>
+                    <input type="hidden" name="property-id" id="property-id" value={{p.property_id}}>
+                </div>                
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>

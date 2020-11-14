@@ -195,43 +195,145 @@ class DataView(TemplateView):
             f_name = request.POST.get("fname")
             l_name = request.POST.get("lname")
             email = request.POST.get("email")
-            user_id = request.POST.get("user-id")
 
             cursor = connection.cursor()
-            cursor.execute("UPDATE manager SET employee_id=%s, first_name=%s, last_name=%s, email=%s WHERE employee_id=%s AND user_id=%s", [e_id,f_name,l_name,email,e_id,user_id])
+            cursor.execute("UPDATE manager SET employee_id=%s, first_name=%s, last_name=%s, email=%s WHERE employee_id=%s", [e_id,f_name,l_name,email,e_id])
         return redirect("/../data")
 
     def delete_managers_table(request):
         if request.method == "POST":
             e_id = request.POST.get("employee_id")
-            user_id = request.POST.get("user-id")
 
             cursor = connection.cursor()
-            cursor.execute("DELETE FROM manager WHERE employee_id=%s AND user_id=%s", [e_id,user_id])
+            cursor.execute("DELETE FROM manager WHERE employee_id=%s", [e_id])
         return redirect("/../data")
 
-    def update_lease_tenants_table(request):
+    def update_property_table(request):
+        if request.method == "POST":
+            pid = request.POST.get("property-id")
+            p_name = request.POST.get("property-name")
+            street_number = request.POST.get("street-number")
+            street_name = request.POST.get("street-name")
+            city = request.POST.get("city")
+            state = request.POST.get("state")
+            zip_code = request.POST.get("zip-code")
+
+            cursor = connection.cursor()
+            cursor.execute("UPDATE property SET property_id=%s,name=%s,street_number=%s,street_name=%s,city=%s,state=%s,zip_code=%s WHERE property_id=%s", [pid,p_name,street_number,street_name,city,state,zip_code,pid])
+        return redirect("/../data")
+
+    def delete_property_table(request):
+        if request.method == "POST":
+            pid = request.POST.get("property-id")
+
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM property WHERE property_id=%s", [pid])
+        return redirect("/../data")
+
+    def update_amenities_table(request):
+        if request.method == "POST":
+            amenities_id = request.POST.get("amenities-id")
+            pet = request.POST.get("pet-friendly")
+            dryer = request.POST.get("dryer-washer")
+            ac = request.POST.get("ac")
+            heating = request.POST.get("heating")
+            internet = request.POST.get("internet")
+
+            cursor = connection.cursor()
+            cursor.execute("UPDATE amenities SET amenities_id=%s,pet_friendly=%s,dryer_washer=%s,ac=%s,heating=%s,internet=%s WHERE amenities_id=%s", [amenities_id,pet,dryer,ac,heating,internet,amenities_id])
+        return redirect("/../data")
+
+    def delete_amenities_table(request):
+        if request.method == "POST":
+            amenities_id = request.POST.get("amenities-id")
+
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM amenities WHERE amenities_id=%s", [amenities_id])
+        return redirect("/../data")
+
+    def update_lease_table(request):
         if request.method == "POST":
             t_id = request.POST.get("transaction-id")
-            t_name = request.POST.get("tenant-name")  
-            old_t_name = request.POST.get("old-tenant-name")
+            price = request.POST.get("price")
+            s_date = request.POST.get("s-date")
+            e_date = request.POST.get("e-date")
 
             cursor = connection.cursor()
-            # cursor.execute("UPDATE lease_tenants SET transaction_id=%s, tenant_name=%s WHERE transaction_id=%s", [t_id,t_name,t_id])
-            # it won't work if two people share the same transaction id.
-            cursor.execute("UPDATE lease_tenants SET transaction_id=%s, tenant_name=%s WHERE transaction_id=%s AND tenant_name=%s", [t_id,t_name,t_id,old_t_name])
+            cursor.execute("UPDATE lease SET transaction_id=%s,price=%s,start_date=%s,end_date=%s WHERE transaction_id=%s", [t_id,price,s_date,e_date,t_id])
         return redirect("/../data")
 
-    def delete_lease_tenants_table(request):
+    def delete_lease_table(request):
         if request.method == "POST":
             t_id = request.POST.get("transaction-id")
-            t_name = request.POST.get("tenant-name") 
 
             cursor = connection.cursor()
-            # it only allows me to delete all tenants that share the same transaction id.
-            cursor.execute("DELETE FROM lease_tenants WHERE transaction_id=%s", [t_id])
-            # cursor.execute("DELETE FROM lease_tenants WHERE transaction_id=%s AND tenant_name=%s", [t_id,t_name])
+            cursor.execute("DELETE FROM lease WHERE transaction_id=%s", [t_id])
         return redirect("/../data")
+
+    def update_apartment_table(request):
+        if request.method == "POST":
+            p_id = request.POST.get("property-id")
+            a_num = request.POST.get("a-num")
+            style = request.POST.get("style")
+            s_f = request.POST.get("sf")
+            t_id = request.POST.get("t-id")
+
+            cursor = connection.cursor()
+            cursor.execute("UPDATE apartment SET property_id=%s,apartment_number=%s,style=%s,square_feet=%s,transaction_id=%s WHERE property_id=%s AND apartment_number=%s", [p_id,a_num,style,s_f,t_id,p_id,a_num])
+        return redirect("/../data")
+
+    def delete_apartment_table(request):
+        if request.method == "POST":
+            p_id = request.POST.get("p-id")
+            a_num = request.POST.get("a-num")
+
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM apartment WHERE property_id=%s AND apartment_number=%s",[p_id,a_num])
+        return redirect("/../data")
+
+    def update_provides_table(request):
+        if request.method == "POST":
+            p_id = request.POST.get("property-id")
+            a_id = request.POST.get("a-id")
+
+            cursor = connection.cursor()
+            cursor.execute("UPDATE provides SET amenities_id=%s WHERE property_id=%s",[a_id,p_id])
+        return redirect("/../data")
+
+    def delete_provides_table(request):
+        if request.method == "POST":
+            p_id = request.POST.get("property-id")
+
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM provides WHERE property_id=%s", [p_id])
+        return redirect("/../data")
+
+    def update_manages_table(request):
+        if request.method == "POST":
+            p_id = request.POST.get("p-id")
+            e_id = request.POST.get("e-id")
+
+            cursor = connection.cursor()
+            cursor.execute("UPDATE manages SET employee_id =%s WHERE property_id=%s", [e_id,p_id])
+        return redirect("/../data")
+
+    def delete_manages_table(request):
+        if request.method == "POST":
+            p_id = request.POST.get("p-id")
+
+            cursor = connection.cursor()
+            cursor.execute("DELETE FROM manages WHERE property_id=%s", [p_id])
+        return redirect("/../data")
+
+    def get_apt_info(request):
+        if request.method == "POST":
+            p_id = request.POST.get("property-id")
+
+            cursor = connection.cursor()
+            cursor.execute("CALL getProp_apartment(%s)", [p_id])
+            apt_info = dictfetchall(cursor)
+
+        return render(request, "tables/stored_procedure_info.html", {'apt_info':apt_info})
         
 
 class AddView(TemplateView):

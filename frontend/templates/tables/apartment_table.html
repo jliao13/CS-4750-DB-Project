@@ -2,17 +2,73 @@
 <h1 class="center">Apartment Table</h1>
 <table class="center" style="width:100%; height:100%;">
     <tr>
+        <th>Property Id</th>
+        <th>Apartment Number</th>
+        <th>Style</th>
+        <th>Square Feet</th>
         <th>Transaction Id</th>
-        <th>Price</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>User Id</th>
+        <th>Edit?</th>
+        <th>Delete?</th>
     </tr>
     {% for a in apartments %}
     <tr>
         {% for key,value in a.items %}
         <td>{{value}}</td>
         {% endfor %}
+        <td>
+            <!-- Trigger the modal with a button -->
+            <button type='button' class='btn btn-primary' data-toggle="modal" data-target="#myModal_apartment_table">
+            Edit
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal_apartment_table" role="dialog">
+                <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Make Change to Apartment Table</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="formClass" action="{% url 'update_apartment_table' %}" method="POST">{% csrf_token %}
+                            <div class="form-group">
+                                <label for="property-id">Property ID:</label>
+                                <input type="number" name="property-id" style="max-width: 70%;" id = "property-id" placeholder={{a.property_id}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="a-num">Apartment Number:</label>
+                                <input type="number" name="a-num" style="max-width: 70%;" id = "a-num" placeholder={{a.apartment_number}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="style">Style:</label>
+                                <input type="text" name="style" style="max-width: 70%;" id = "style" placeholder={{a.style}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="sf">Square Feet:</label>
+                                <input type="number" name="sf" style="max-width: 70%;" id = "sf" placeholder={{a.square_feet}} required>
+                            </div>
+                            <div class="form-group">
+                                <label for="t-id">Transaction ID:</label>
+                                <input type="number" name="t-id" style="max-width: 70%;" id = "t-id" placeholder={{a.transaction_id}} required>
+                            </div>             
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </td>
+        <td>
+            <form class="formClass" action="{% url 'delete_apartment_table' %}" method="POST">{% csrf_token %}    
+                <div>
+                    <input type="hidden" name="p-id" id="p-id" value={{a.property_id}}>
+                </div>
+                <div>
+                    <input type="hidden" name="a-num" id="a-num" value={{a.apartment_number}}>
+                </div>                 
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>

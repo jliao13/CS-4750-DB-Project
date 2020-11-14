@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+	<h2>Use the back button in the browser to go back the last Page</h2>
+	<table class="center" style="width:100%; height:100%; border: 1px solid black;">
+	<tr>
+		<th>Property ID</th>
+		<th>Property Name</th>
+		<th>Street Number</th>
+		<th>Street Name</th>
+		<th>City</th>
+		<th>State</th>
+		<th>Zip Code</th>
+		<th>Apartment Number</th>
+		<th>Style</th>
+		<th>Square Feet</th>
+		<th>Transaction ID</th>
+	</tr>
+	{% for info in apt_info %}
+	<tr>
+		{% for key,value in info.items %}
+		<td>{{value}}</td>
+        {% endfor %}
+	</tr>
+	{% endfor %}
+	</tr>
+	</table>
+</body>
+</html>
