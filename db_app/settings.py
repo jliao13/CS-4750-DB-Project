@@ -91,7 +91,7 @@ if os.getenv('GAE_APPLICATION', None):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'HOST': '/cloudsql/cs-4750-db-292115:us-east4:cville-db',
+            'HOST': '/cloudsql/cs-4750-db-292115:us-east4:cville-leasing-db',
             'NAME': 'cville_leasing',
             'USER': 'Company User',
             'PASSWORD': 'company123',
