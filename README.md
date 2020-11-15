@@ -12,7 +12,7 @@ Setup to connect mysql gcp to django app: https://medium.com/@tintinve/instructi
 
 Run on desktop to run sql proxy:
 ```
-./cloud_sql_proxy -instances=cs-4750-db-292115:us-east4:cville-leasing-project-db=tcp:3306
+./cloud_sql_proxy -instances=cs-4750-db-292115:us-east1:cville-leasing-db=tcp:3306
 ```
 
 ### Set up Python Virtual Environment
